@@ -1,0 +1,72 @@
+[27-Jul-2025 14:54:06 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 14:54:06 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:21
+Stack trace:
+#0 F:\www\backend\config\database.php(21): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 21
+[27-Jul-2025 14:59:15 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 14:59:15 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:21
+Stack trace:
+#0 F:\www\backend\config\database.php(21): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 21
+[27-Jul-2025 14:59:16 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 14:59:16 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:21
+Stack trace:
+#0 F:\www\backend\config\database.php(21): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 21
+[27-Jul-2025 14:59:18 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 14:59:18 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:21
+Stack trace:
+#0 F:\www\backend\config\database.php(21): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 21
+[27-Jul-2025 15:01:43 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 15:01:43 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:22
+Stack trace:
+#0 F:\www\backend\config\database.php(22): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 22
+[27-Jul-2025 15:01:44 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 15:01:44 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:22
+Stack trace:
+#0 F:\www\backend\config\database.php(22): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 22
+[27-Jul-2025 15:01:44 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 15:01:44 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:22
+Stack trace:
+#0 F:\www\backend\config\database.php(22): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 22
+[27-Jul-2025 15:01:44 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 15:01:44 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:22
+Stack trace:
+#0 F:\www\backend\config\database.php(22): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 22
+[27-Jul-2025 15:01:45 UTC] Database connection error: Unknown database 'nananom_farms'
+[27-Jul-2025 15:01:45 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown database 'nananom_farms' in F:\www\backend\config\database.php:22
+Stack trace:
+#0 F:\www\backend\config\database.php(22): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'nananom_farms', 3306)
+#1 F:\www\backend\classes\Auth.php(10): getDbConnection()
+#2 F:\www\backend\admin\index.php(5): App\Auth->__construct()
+#3 {main}
+  thrown in F:\www\backend\config\database.php on line 22

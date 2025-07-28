@@ -1,0 +1,595 @@
+/* Additional styles for services page */
+
+/* Page Header */
+.page-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  color: white;
+  padding: 8rem 0 4rem;
+  margin-top: 80px;
+}
+
+.page-header-content {
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.page-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.breadcrumb a {
+  color: white;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.breadcrumb a:hover {
+  opacity: 1;
+}
+
+/* Services Controls */
+.services-controls {
+  background: white;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 80px;
+  z-index: 100;
+}
+
+.controls-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.filter-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filter-controls select {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-controls select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Enhanced Service Cards */
+.service-card.enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card.enhanced:hover .service-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.service-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.action-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+.action-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.service-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.service-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.feature-tag {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.feature-tag i {
+  color: var(--success-color);
+  font-size: 0.7rem;
+}
+
+.service-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.service-rating .fas.fa-star,
+.service-rating .fas.fa-star-half-alt {
+  color: var(--accent-color);
+}
+
+.service-rating .far.fa-star {
+  color: #ddd;
+}
+
+.rating-count {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.service-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Service Detail Modal */
+.modal-large .modal-content {
+  max-width: 900px;
+  width: 95%;
+}
+
+.service-detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.service-detail-image {
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.service-price-large {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.service-price-large .price-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: block;
+}
+
+.service-price-large .price-unit {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.service-rating-large {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.service-rating-large .rating-text {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.service-description-full,
+.service-specifications,
+.service-features-full {
+  margin-bottom: 2rem;
+}
+
+.service-description-full h4,
+.service-specifications h4,
+.service-features-full h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.service-specifications ul {
+  list-style: none;
+}
+
+.service-specifications li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.service-specifications li:last-child {
+  border-bottom: none;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.features-grid .feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+}
+
+.features-grid .feature-item i {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+/* Service Detail Sidebar */
+.service-actions-panel {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 2rem;
+}
+
+.service-actions-panel .btn {
+  margin-bottom: 1rem;
+}
+
+.service-actions-panel .btn:last-child {
+  margin-bottom: 0;
+}
+
+.related-services h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.related-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.related-service-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+}
+
+.related-service-item:hover {
+  background: var(--bg-secondary);
+  transform: translateX(5px);
+}
+
+.related-service-item i {
+  width: 40px;
+  height: 40px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.related-service-item h5 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.related-service-item span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Service Comparison */
+.service-comparison {
+  background: var(--bg-secondary);
+  padding: 3rem 0;
+}
+
+.comparison-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.comparison-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.comparison-table-grid {
+  width: 100%;
+  background: white;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.comparison-table-grid th,
+.comparison-table-grid td {
+  padding: 1.5rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table-grid th {
+  background: var(--bg-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.comparison-table-grid th:first-child {
+  width: 150px;
+}
+
+.comparison-service-header {
+  text-align: center;
+  position: relative;
+}
+
+.comparison-service-header i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.comparison-service-header h4 {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.remove-comparison {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  background: var(--error-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+
+.remove-comparison:hover {
+  transform: scale(1.1);
+}
+
+/* Load More */
+.load-more-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* No Results */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.no-results i {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-results h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  color: white;
+  padding: 4rem 0;
+}
+
+.cta-content {
+  text-align: center;
+}
+
+.cta-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cta-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-buttons .btn-outline {
+  border-color: white;
+  color: white;
+}
+
+.cta-buttons .btn-outline:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 6rem 0 3rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .controls-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-controls {
+    flex-wrap: wrap;
+  }
+
+  .service-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .comparison-table-grid {
+    font-size: 0.9rem;
+  }
+
+  .comparison-table-grid th,
+  .comparison-table-grid td {
+    padding: 1rem 0.5rem;
+  }
+
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nananom Farms - Premium Palm Oil Solutions</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/images/logo.png" alt="Nananom Farms">
+                <span>Nananom Farms</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="admin/" class="admin-link">Admin</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Premium Palm Oil Solutions</h1>
+            <p>Leading supplier of high-quality crude and refined palm oil for industrial and commercial use</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="openBookingModal()">Book Service</button>
+                <button class="btn btn-secondary" onclick="openEnquiryModal()">Make Enquiry</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="/placeholder.svg?height=400&width=600" alt="Palm Oil Plantation">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Nananom Farms</h2>
+                    <p>With over two decades of experience in palm oil production, Nananom Farms has established itself as a trusted supplier in the agribusiness sector. We specialize in sustainable palm oil production and distribution.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Sustainable farming practices</li>
+                        <li><i class="fas fa-check"></i> Quality assurance certified</li>
+                        <li><i class="fas fa-check"></i> Reliable supply chain</li>
+                        <li><i class="fas fa-check"></i> Expert consultation services</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="/placeholder.svg?height=300&width=400" alt="Processing Facility">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>123 Palm Grove Avenue<br>Accra, Ghana</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+233 24 123 4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@nananomfarms.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.7174927508756!2d-0.1969!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMzYnMTMuMyJOIDDCsDExJzQ4LjgiVw!5e0!3m2!1sen!2sgh!4v1234567890" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBookingModal()">&times;</span>
+            <h2>Book a Service</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="customerName">Full Name *</label>
+                    <input type="text" id="customerName" name="customer_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="service">Service *</label>
+                    <select id="service" name="service" required>
+                        <option value="">Select a service</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentDate">Preferred Date *</label>
+                    <input type="date" id="appointmentDate" name="appointment_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingTime">Preferred Time</label>
+                    <input type="time" id="bookingTime" name="booking_time" value="09:00">
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Enquiry Modal -->
+    <div id="enquiryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEnquiryModal()">&times;</span>
+            <h2>Make an Enquiry</h2>
+            <form id="enquiryForm">
+                <div class="form-group">
+                    <label for="enquiryName">Full Name *</label>
+                    <input type="text" id="enquiryName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="enquiryEmail">Email *</label>
+                    <input type="email" id="enquiryEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="enquiryPhone">Phone</label>
+                    <input type="tel" id="enquiryPhone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Enquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFeedbackModal()">&times;</span>
+            <h2>Share Your Feedback</h2>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="feedbackName">Name</label>
+                    <input type="text" id="feedbackName" name="customer_name">
+                </div>
+                <div class="form-group">
+                    <label for="feedbackEmail">Email</label>
+                    <input type="email" id="feedbackEmail" name="customer_email">
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="feedbackMessage">Your Feedback *</label>
+                    <textarea id="feedbackMessage" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nananom Farms</h3>
+                    <p>Your trusted partner in premium palm oil solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +233 24 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> info@nananomfarms.com</p>
+                </div>
+                <div class="footer-section">
+                    <button class="btn btn-secondary" onclick="openFeedbackModal()">Give Feedback</button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nananom Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
