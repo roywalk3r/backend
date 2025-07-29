@@ -46,7 +46,6 @@ html {
   --style-font: "Bruno Ace", sans-serif;
   --primary-light: #4a7c23;
   --primary-dark: #1a3009;
-  --accent-color: #e76f51;
   --success-color: #2a9d8f;
   --warning-color: #e9c46a;
   --error-color: #e63946;
@@ -1454,7 +1453,7 @@ footer .footer-container {
 }
 
 .btn-primary {
-  background: var(--primary-color);
+  background: var(--button-color);
   color: white;
   padding: 1rem;
 }

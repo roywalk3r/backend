@@ -1,5 +1,4 @@
-// API Client for Nananom Farms
-class APIClient {
+ class APIClient {
   constructor() {
     this.baseURL = "../api"
     this.defaultHeaders = {
