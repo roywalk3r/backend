@@ -756,3 +756,8 @@ Stack trace:
 
 [29-Jul-2025 19:35:08 UTC] Mail debug (level 2): SERVER -> CLIENT: 221 2.0.0 Rseann Mailpit ESMTP Service closing transmission channel
 
+[29-Jul-2025 22:43:03 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[29-Jul-2025 22:43:14 Europe/Berlin] Mail debug (level 1): SMTP ERROR: Failed to connect to server: No connection could be made because the target machine actively refused it (10061)
+[29-Jul-2025 22:43:14 Europe/Berlin] Mail debug (level 2): SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[29-Jul-2025 22:43:14 Europe/Berlin] Login notification error: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[29-Jul-2025 22:43:14 Europe/Berlin] Failed to send login notification: Failed to send login notification: SMTP Error: Could not connect to SMTP host. Failed to connect to server
