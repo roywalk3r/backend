@@ -15,32 +15,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/enquiries.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 
     <script src="https://kit.fontawesome.com/00a449879e.js" crossorigin="anonymous"></script>
-    <title>Enquiries | Nananom Farms </title>
+    <title>Nananom Farms | Home</title>
 </head>
 
 <body>
+
     <?php
-include_once __DIR__ . '/partials/header.php';
-
-?>
-
+    include_once __DIR__ . '/partials/header.php';
+    ?>
     <main class="container">
         <div class="hero">
             <div class="overlay"></div>
             <div class="hero-image">
-                <img src="assets/images/OPTIONS_1.jpg" alt="Hero Image">
+                <img src="assets/images/contact.png" alt="Hero Image">
             </div>
 
             <div class="hero-content">
-                <h2>General Enquiries</h2>
-                <p>Have questions or need information? Reach out to us , we’re here to help.</p>
+                <h2>Contact Us</h2>
+                <p>We shall get back to you as soon as possible.</p>
             </div>
         </div>
-        <!-----general enquiries form----->
         <div class="enquiries-flex" id="enquirySection">
             <div class="form-container">
                 <h1>Send Us a Message</h1>
@@ -77,7 +80,7 @@ include_once __DIR__ . '/partials/header.php';
                     <div class="submit-section">
                         <button type="submit" class="btn btn-primary btn-full">
                             <i class="fas fa-paper-plane"></i>
-                            Send Enquiry
+                            Contact US
                         </button>
                     </div>
                 </form>
@@ -142,29 +145,24 @@ include_once __DIR__ . '/partials/header.php';
             </div>
         </div>
 
-        =
-        <!-----submit enquiry----->
-        <div class="hero">
-            <div class="overlay"></div>
-            <div class="hero-image">
-                <img src="assets/images/OTHER_OPTION_1.png" alt="Hero Image">
-            </div>
-            <div class="hero-content">
-                <h2>We’re Here Whenever You Need Us</h2>
-                <p>Send us a message today and we’re always ready to answer your questions and support your needs.</p>
-                <a href="#enquirySection" class="ctaBtn ctaBt-main">Submit Enquiry</a>
-            </div>
         </div>
 
+
+        <div class="map-container Rectangle10">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31599.263100713604!2d-0.200000!3d5.650000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfe10887c2b9cf39%3A0x7a6b7f0e0f325478!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sgh!4v1695000000000!5m2!1sen!2sgh"
+                width="100%" height="100%" style="border:0; border-radius: 20px;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
 
     </main>
     <div id="toastContainer"></div>
 
     <?php
-include_once __DIR__ . '/partials/footer.php';
-?>
+    include_once __DIR__ . '/partials/footer.php';
+    ?>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/toast.js"></script>
 
 </body>
 

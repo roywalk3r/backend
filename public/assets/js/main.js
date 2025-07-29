@@ -1,4 +1,12 @@
-// Modern Frontend JavaScript for Nananom Farms
+const toastManager = {
+  error: (message) => {
+    console.error(message)
+  },
+  success: (message) => {
+    console.log(message)
+  },
+}
+
 class NananomFarms {
   constructor() {
     this.services = []
@@ -162,77 +170,34 @@ class NananomFarms {
       console.log(data, "services")
       if (data.success) {
         this.services = data.services
-        // this.displayServices(data.services)
         this.populateServiceSelect(data.services)
       } else {
-        this.showToast("Failed to load services", "error")
+        toastManager.error("Failed to load services")
         this.displayServiceError()
       }
     } catch (error) {
       console.error("Error loading services:", error)
-      this.showToast("Failed to load services", "error")
+      toastManager.error("Failed to load services")
       this.displayServiceError()
     }
   }
 
-  // displayServices(services) {
-  //   const servicesGrid = document.getElementById("servicesGrid")
-
-  //   if (!services || services.length === 0) {
-  //     servicesGrid.innerHTML = `
-  //       <div class="no-services">
-  //         <i class="fas fa-info-circle"></i>
-  //         <h3>No Services Available</h3>
-  //         <p>Please check back later for our service offerings.</p>
-  //       </div>
-  //     `
-  //     return
-  //   }
-
-  //   servicesGrid.innerHTML = services
-  //     .map(
-  //       (service) => `
-  //         <div class="service-card" data-category="${service.category || "general"}">
-  //           <div class="service-image">
-  //             <i class="fas fa-${this.getServiceIcon(service.category)}"></i>
-  //           </div>
-  //           <div class="service-content">
-  //             <h3 class="service-title">${this.escapeHtml(service.name)}</h3>
-  //             <p class="service-description">${this.escapeHtml(service.description)}</p>
-  //             <div class="service-price">
-  //               <span class="price-amount">$${Number.parseFloat(service.price).toFixed(2)}</span>
-  //               <span class="price-unit">per ${service.unit || "unit"}</span>
-  //             </div>
-  //             <ul class="service-features">
-  //               <li><i class="fas fa-check"></i> Quality Guaranteed</li>
-  //               <li><i class="fas fa-check"></i> Fast Delivery</li>
-  //               <li><i class="fas fa-check"></i> Expert Support</li>
-  //             </ul>
-  //             <button class="btn btn-primary btn-full" onclick="app.bookService(${service.id}, '${this.escapeHtml(service.name)}')">
-  //               <i class="fas fa-calendar-plus"></i>
-  //               Book Now
-  //             </button>
-  //           </div>
-  //         </div>
-  //       `,
-  //     )
-  //     .join("")
-  // }
-
-  // displayServiceError() {
-  //   const servicesGrid = document.getElementById("servicesGrid")
-  //   servicesGrid.innerHTML = `
-  //     <div class="service-error">
-  //       <i class="fas fa-exclamation-triangle"></i>
-  //       <h3>Unable to Load Services</h3>
-  //       <p>There was an error loading our services. Please try again later.</p>
-  //       <button class="btn btn-primary" onclick="app.loadServices()">
-  //         <i class="fas fa-refresh"></i>
-  //         Retry
-  //       </button>
-  //     </div>
-  //   `
-  // }
+  displayServiceError() {
+    const servicesGrid = document.getElementById("servicesGrid")
+    if (servicesGrid) {
+      servicesGrid.innerHTML = `
+        <div class="service-error">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>Unable to Load Services</h3>
+          <p>There was an error loading our services. Please try again later.</p>
+          <button class="btn btn-primary" onclick="app.loadServices()">
+            <i class="fas fa-refresh"></i>
+            Retry
+          </button>
+        </div>
+      `
+    }
+  }
 
   populateServiceSelect(services) {
     const serviceSelects = [document.getElementById("service"), document.getElementById("feedbackService")]
@@ -246,7 +211,7 @@ class NananomFarms {
 
         services.forEach((service) => {
           const option = document.createElement("option")
-          option.value = service.id // Use numeric service ID
+          option.value = service.id
           option.dataset.serviceName = service.name
           option.textContent = `${service.name} - $${Number.parseFloat(service.price).toFixed(2)}/${service.unit}`
           serviceSelect.appendChild(option)
@@ -266,7 +231,7 @@ class NananomFarms {
       const data = await response.json()
 
       if (data.success && data.feedback.length > 0) {
-        this.displayTestimonials(data.feedback.slice(0, 6)) // Show top 6
+        this.displayTestimonials(data.feedback.slice(0, 6))
       } else {
         this.displayDefaultTestimonials()
       }
@@ -369,22 +334,15 @@ class NananomFarms {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
 
-    // Debug: Log the form data
-    console.log("Form data:", data)
-
-    // Ensure data matches API expectations exactly
     const bookingData = {
       customer_name: data.customer_name,
       customer_email: data.customer_email,
       customer_phone: data.customer_phone,
-      service_id: Number.parseInt(data.service_id), // Ensure it's an integer
+      service_id: Number.parseInt(data.service_id),
       booking_date: data.booking_date,
       booking_time: data.booking_time,
       notes: data.notes || "",
     }
-
-    // Debug: Log the booking data being sent
-    console.log("Booking data being sent:", bookingData)
 
     try {
       this.showButtonLoading(e.target.querySelector('button[type="submit"]'))
@@ -402,19 +360,18 @@ class NananomFarms {
       }
 
       const result = await response.json()
-      console.log("API Response:", result)
 
       if (result.success) {
-        this.showToast("Booking submitted successfully! We will contact you soon.", "success")
+        toastManager.success("Booking submitted successfully! We will contact you soon.")
         this.closeBookingModal()
         e.target.reset()
         this.resetFormSteps()
       } else {
-        this.showToast(result.message || "Failed to submit booking", "error")
+        toastManager.error(result.message || "Failed to submit booking")
       }
     } catch (error) {
       console.error("Error submitting booking:", error)
-      this.showToast("Failed to submit booking. Please try again.", "error")
+      toastManager.error("Failed to submit booking. Please try again.")
     } finally {
       this.hideButtonLoading(e.target.querySelector('button[type="submit"]'))
     }
@@ -423,10 +380,13 @@ class NananomFarms {
   async handleEnquirySubmit(e) {
     e.preventDefault()
 
+    if (!this.validateEnquiryForm(e.target)) {
+      return
+    }
+
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
 
-    // Ensure data matches API expectations exactly
     const enquiryData = {
       name: data.name,
       email: data.email,
@@ -453,15 +413,16 @@ class NananomFarms {
       const result = await response.json()
 
       if (result.success) {
-        this.showToast("Enquiry submitted successfully! We will respond within 24 hours.", "success")
+        toastManager.success("Enquiry submitted successfully! We will respond within 24 hours.")
         this.closeEnquiryModal()
         e.target.reset()
+        this.clearFormErrors(e.target)
       } else {
-        this.showToast(result.message || "Failed to submit enquiry", "error")
+        toastManager.error(result.message || "Failed to submit enquiry")
       }
     } catch (error) {
       console.error("Error submitting enquiry:", error)
-      this.showToast("Failed to submit enquiry. Please try again.", "error")
+      toastManager.error("Failed to submit enquiry. Please try again.")
     } finally {
       this.hideButtonLoading(e.target.querySelector('button[type="submit"]'))
     }
@@ -473,12 +434,11 @@ class NananomFarms {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
 
-    // Ensure data matches API expectations exactly
     const feedbackData = {
       customer_name: data.customer_name,
       customer_email: data.customer_email,
-      service_id: Number.parseInt(data.service_id), // Convert to integer
-      rating: Number.parseInt(data.rating), // Convert to integer
+      service_id: Number.parseInt(data.service_id),
+      rating: Number.parseInt(data.rating),
       comment: data.comment,
     }
 
@@ -500,16 +460,16 @@ class NananomFarms {
       const result = await response.json()
 
       if (result.success) {
-        this.showToast("Thank you for your feedback!", "success")
+        toastManager.success("Thank you for your feedback!")
         this.closeFeedbackModal()
         e.target.reset()
         this.resetRatingInput()
       } else {
-        this.showToast(result.message || "Failed to submit feedback", "error")
+        toastManager.error(result.message || "Failed to submit feedback")
       }
     } catch (error) {
       console.error("Error submitting feedback:", error)
-      this.showToast("Failed to submit feedback. Please try again.", "error")
+      toastManager.error("Failed to submit feedback. Please try again.")
     } finally {
       this.hideButtonLoading(e.target.querySelector('button[type="submit"]'))
     }
@@ -521,7 +481,6 @@ class NananomFarms {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
 
-    // Use enquiry API for quick contact form
     const contactData = {
       name: data.name,
       email: data.email,
@@ -548,17 +507,106 @@ class NananomFarms {
       const result = await response.json()
 
       if (result.success) {
-        this.showToast("Message sent successfully! We will get back to you soon.", "success")
+        toastManager.success("Message sent successfully! We will get back to you soon.")
         e.target.reset()
       } else {
-        this.showToast(result.message || "Failed to send message", "error")
+        toastManager.error(result.message || "Failed to send message")
       }
     } catch (error) {
       console.error("Error sending message:", error)
-      this.showToast("Failed to send message. Please try again.", "error")
+      toastManager.error("Failed to send message. Please try again.")
     } finally {
       this.hideButtonLoading(e.target.querySelector('button[type="submit"]'))
     }
+  }
+
+  // Form Validation Methods
+  validateEnquiryForm(form) {
+    const requiredFields = form.querySelectorAll("[required]")
+    let isValid = true
+
+    // Clear previous errors
+    this.clearFormErrors(form)
+
+    requiredFields.forEach((field) => {
+      if (!field.value.trim()) {
+        this.showFieldError(field, "This field is required")
+        isValid = false
+      }
+    })
+
+    // Validate email
+    const emailField = form.querySelector('[name="email"]')
+    if (emailField && emailField.value && !this.isValidEmail(emailField.value)) {
+      this.showFieldError(emailField, "Please enter a valid email address")
+      isValid = false
+    }
+
+    if (!isValid) {
+      toastManager.error("Please fill in all required fields correctly")
+    }
+
+    return isValid
+  }
+
+  validateBookingForm() {
+    const form = document.getElementById("bookingForm")
+    if (!form) return true
+
+    const requiredFields = form.querySelectorAll("[required]")
+    let isValid = true
+
+    requiredFields.forEach((field) => {
+      if (!field.value.trim()) {
+        field.classList.add("error")
+        isValid = false
+      } else {
+        field.classList.remove("error")
+      }
+    })
+
+    // Validate email
+    const emailField = form.querySelector('[name="customer_email"]')
+    if (emailField && emailField.value && !this.isValidEmail(emailField.value)) {
+      emailField.classList.add("error")
+      isValid = false
+    }
+
+    // Validate date
+    const dateField = form.querySelector('[name="booking_date"]')
+    if (dateField && dateField.value) {
+      const selectedDate = new Date(dateField.value)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+
+      if (selectedDate < today) {
+        dateField.classList.add("error")
+        toastManager.error("Please select a future date")
+        isValid = false
+      }
+    }
+
+    return isValid
+  }
+
+  showFieldError(field, message) {
+    field.classList.add("error")
+    const errorSpan = field.parentElement.querySelector(".error-message")
+    if (errorSpan) {
+      errorSpan.textContent = message
+      errorSpan.style.display = "block"
+    }
+  }
+
+  clearFormErrors(form) {
+    const errorFields = form.querySelectorAll(".error")
+    const errorMessages = form.querySelectorAll(".error-message")
+
+    errorFields.forEach((field) => field.classList.remove("error"))
+    errorMessages.forEach((msg) => {
+      msg.textContent = ""
+      msg.style.display = "none"
+    })
   }
 
   // Modal Methods
@@ -612,7 +660,6 @@ class NananomFarms {
   }
 
   handleModalClicks(e) {
-    // Close modal when clicking outside
     if (e.target.classList.contains("modal")) {
       e.target.classList.remove("active")
       document.body.style.overflow = ""
@@ -620,7 +667,6 @@ class NananomFarms {
   }
 
   handleKeydown(e) {
-    // Close modal on Escape key
     if (e.key === "Escape") {
       const activeModal = document.querySelector(".modal.active")
       if (activeModal) {
@@ -648,18 +694,15 @@ class NananomFarms {
   }
 
   updateFormSteps() {
-    // Hide all steps
     document.querySelectorAll(".form-step").forEach((step) => {
       step.classList.remove("active")
     })
 
-    // Show current step
     const currentStepElement = document.querySelector(`[data-step="${this.currentStep}"]`)
     if (currentStepElement) {
       currentStepElement.classList.add("active")
     }
 
-    // Update navigation buttons
     const prevBtn = document.getElementById("prevStep")
     const nextBtn = document.getElementById("nextStep")
     const submitBtn = document.getElementById("submitBooking")
@@ -697,47 +740,7 @@ class NananomFarms {
     })
 
     if (!isValid) {
-      this.showToast("Please fill in all required fields", "error")
-    }
-
-    return isValid
-  }
-
-  validateBookingForm() {
-    const form = document.getElementById("bookingForm")
-    if (!form) return true
-
-    const requiredFields = form.querySelectorAll("[required]")
-    let isValid = true
-
-    requiredFields.forEach((field) => {
-      if (!field.value.trim()) {
-        field.classList.add("error")
-        isValid = false
-      } else {
-        field.classList.remove("error")
-      }
-    })
-
-    // Validate email
-    const emailField = form.querySelector('[name="customer_email"]')
-    if (emailField && emailField.value && !this.isValidEmail(emailField.value)) {
-      emailField.classList.add("error")
-      isValid = false
-    }
-
-    // Validate date
-    const dateField = form.querySelector('[name="booking_date"]')
-    if (dateField && dateField.value) {
-      const selectedDate = new Date(dateField.value)
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-
-      if (selectedDate < today) {
-        dateField.classList.add("error")
-        this.showToast("Please select a future date", "error")
-        isValid = false
-      }
+      toastManager.error("Please fill in all required fields")
     }
 
     return isValid
@@ -747,7 +750,7 @@ class NananomFarms {
   bookService(serviceId, serviceName) {
     const serviceSelect = document.getElementById("service")
     if (serviceSelect) {
-      serviceSelect.value = serviceId // This should now be a numeric ID
+      serviceSelect.value = serviceId
     }
     this.openBookingModal()
   }
@@ -756,13 +759,11 @@ class NananomFarms {
     const filterValue = e.target.dataset.filter
     const serviceCards = document.querySelectorAll(".service-card")
 
-    // Update active filter button
     document.querySelectorAll(".filter-btn").forEach((btn) => {
       btn.classList.remove("active")
     })
     e.target.classList.add("active")
 
-    // Filter service cards
     serviceCards.forEach((card) => {
       if (filterValue === "all" || card.dataset.category === filterValue) {
         card.style.display = "block"
@@ -818,47 +819,7 @@ class NananomFarms {
     }
   }
 
-  showToast(message, type = "info") {
-    const toast = document.getElementById("toast")
-    if (!toast) return
-
-    const toastIcon = toast.querySelector(".toast-icon")
-    const toastMessage = toast.querySelector(".toast-message")
-
-    // Set icon based on type
-    const icons = {
-      success: "fas fa-check-circle",
-      error: "fas fa-exclamation-circle",
-      info: "fas fa-info-circle",
-    }
-
-    if (toastIcon) {
-      toastIcon.className = `toast-icon ${icons[type]}`
-    }
-    if (toastMessage) {
-      toastMessage.textContent = message
-    }
-
-    toast.className = `toast ${type}`
-
-    // Show toast
-    toast.classList.add("show")
-
-    // Auto hide after 5 seconds
-    setTimeout(() => {
-      this.closeToast()
-    }, 5000)
-  }
-
-  closeToast() {
-    const toast = document.getElementById("toast")
-    if (toast) {
-      toast.classList.remove("show")
-    }
-  }
-
   updateRatingDisplay() {
-    // This method is called when rating changes
     // Additional visual feedback can be added here
   }
 
@@ -869,7 +830,6 @@ class NananomFarms {
   }
 
   initializeAnimations() {
-    // Animate statistics on scroll
     const observerOptions = {
       threshold: 0.5,
       rootMargin: "0px 0px -100px 0px",
@@ -889,7 +849,6 @@ class NananomFarms {
       observer.observe(heroStats)
     }
 
-    // Fade in animations
     const fadeElements = document.querySelectorAll(".fade-in")
     const fadeObserver = new IntersectionObserver(
       (entries) => {
@@ -983,10 +942,6 @@ function openFeedbackModal() {
 
 function closeFeedbackModal() {
   app.closeFeedbackModal()
-}
-
-function closeToast() {
-  app.closeToast()
 }
 
 function bookService(serviceId, serviceName) {

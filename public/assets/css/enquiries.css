@@ -80,7 +80,8 @@ form {
   text-align: center;
 }
 
-button {
+button,
+.btn {
   background: #407c12;
   color: white;
   padding: 15px 40px;
