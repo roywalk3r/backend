@@ -46,8 +46,8 @@
         </div>
         <div class="enquiries-flex" id="enquirySection">
             <div class="form-container">
-                <h1>Send Us a Message</h1>
-                <p class="subtitle">Have a question? We’ll be glad to assist you.</p>
+                <h1>Contact Us</h1>
+                <p class="subtitle">Send us a message today and we'll get back to you as soon as possible.</p>
                 <form id="enquiryForm">
                     <div class="row">
                         <div class="input-group">
