@@ -74,7 +74,7 @@ $usersResult = $enquiryManager->getAssignableUsers();
                 <?php endif; ?>
 
                 <!-- Filters -->
-                <div class="card mb-4">
+                <div class="card mb-4 primary">
                     <div class="card-body">
                         <form method="GET" class="row g-3">
                             <div class="col-md-4">
@@ -132,7 +132,8 @@ $usersResult = $enquiryManager->getAssignableUsers();
                                     <?php foreach ($enquiries['enquiries'] as $enquiry): ?>
                                     <tr>
                                         <td>#<?php echo $enquiry['id']; ?></td>
-                                        <td><?php echo htmlspecialchars($enquiry['name']); ?></td>
+                                        <td><?php echo htmlspecialchars($enquiry['first_name'] . ' ' . $enquiry['last_name']); ?>
+                                        </td>
                                         <td><?php echo htmlspecialchars($enquiry['email']); ?></td>
                                         <td><?php echo htmlspecialchars(substr($enquiry['subject'], 0, 50)) . '...'; ?>
                                         </td>
@@ -304,7 +305,6 @@ $usersResult = $enquiryManager->getAssignableUsers();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/admin.js"></script>
     <script>
     function openEnquiryModal(enquiry) {
         document.getElementById('enquiryId').value = enquiry.id;
@@ -323,10 +323,124 @@ $usersResult = $enquiryManager->getAssignableUsers();
     }
 
     function viewEnquiryDetails(id) {
-        // You can implement AJAX call here to fetch and display full enquiry details
         const modal = new bootstrap.Modal(document.getElementById('viewModal'));
-        document.getElementById('viewModalBody').innerHTML = '<p>Loading enquiry details for ID: ' + id + '</p>';
+        const modalBody = document.getElementById('viewModalBody');
+
+        // Show loading state
+        modalBody.innerHTML = `
+        <div class="text-center p-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading enquiry details...</p>
+        </div>
+    `;
+
         modal.show();
+
+        // Fetch enquiry details
+        fetch(`../api/get_enquiry_details.php?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const enquiry = data.enquiry;
+                    modalBody.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">Contact Information</h6>
+                            <div class="mb-3">
+                                <strong>Name:</strong><br>
+                                <span class="text-primary">${enquiry.name}</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Email:</strong><br>
+                                <a href="mailto:${enquiry.email}" class="text-decoration-none">${enquiry.email}</a>
+                            </div>
+                            ${enquiry.phone ? `
+                                <div class="mb-3">
+                                    <strong>Phone:</strong><br>
+                                    <a href="tel:${enquiry.phone}" class="text-decoration-none">${enquiry.phone}</a>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">Enquiry Details</h6>
+                            <div class="mb-3">
+                                <strong>Status:</strong><br>
+                                <span class="badge bg-${enquiry.status === 'new' ? 'primary' : (enquiry.status === 'resolved' ? 'success' : 'warning')}">
+                                    ${enquiry.status.charAt(0).toUpperCase() + enquiry.status.slice(1).replace('_', ' ')}
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Created:</strong><br>
+                                ${new Date(enquiry.created_at).toLocaleString()}
+                            </div>
+                            ${enquiry.assigned_user_name ? `
+                                <div class="mb-3">
+                                    <strong>Assigned To:</strong><br>
+                                    <span class="text-success">
+                                        <i class="fas fa-user"></i> ${enquiry.assigned_user_name}
+                                        <small class="text-muted">(${enquiry.assigned_user_role})</small>
+                                    </span>
+                                </div>
+                            ` : '<div class="mb-3"><strong>Assigned To:</strong><br><span class="text-danger">Unassigned</span></div>'}
+                        </div>
+                    </div>
+                    
+                    <hr>
+    
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-3">Subject</h6>
+                        <div class="bg-light p-3 rounded">
+                            <strong>${enquiry.subject}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-3">Message</h6>
+                        <div class="bg-light p-3 rounded" style="white-space: pre-wrap;">${enquiry.message}</div>
+                    </div>
+                    
+                    ${enquiry.response ? `
+                        <div class="mb-4">
+                            <h6 class="text-muted mb-3">Response</h6>
+                            <div class="bg-success bg-opacity-10 border border-success border-opacity-25 p-3 rounded">
+                                <div style="white-space: pre-wrap;">${enquiry.response}</div>
+                                ${enquiry.updated_at ? `<small class="text-muted d-block mt-2">Updated: ${new Date(enquiry.updated_at).toLocaleString()}</small>` : ''}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="d-flex gap-2 mt-4">
+                        <button class="btn btn-primary btn-sm" onclick="openEnquiryModal(${JSON.stringify(enquiry).replace(/"/g, '&quot;')})">
+                            <i class="fas fa-edit"></i> Update Status
+                        </button>
+                        <button class="btn btn-success btn-sm" onclick="openAssignModal(${enquiry.id})">
+                            <i class="fas fa-user-plus"></i> ${enquiry.assigned_user_name ? 'Reassign' : 'Assign'}
+                        </button>
+                        <a href="mailto:${enquiry.email}?subject=Re: ${encodeURIComponent(enquiry.subject)}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-reply"></i> Reply via Email
+                        </a>
+                    </div>
+                `;
+                } else {
+                    modalBody.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Error loading enquiry details: ${data.message}
+                    </div>
+                `;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                modalBody.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Failed to load enquiry details. Please try again.
+                </div>
+            `;
+            });
     }
     </script>
 </body>

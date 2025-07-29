@@ -1,4 +1,4 @@
-// Modern Frontend JavaScript
+// Modern Frontend JavaScript for Nananom Farms
 class NananomFarms {
   constructor() {
     this.services = []
@@ -18,37 +18,63 @@ class NananomFarms {
 
   setupEventListeners() {
     // Navigation
-    document.getElementById("hamburger").addEventListener("click", this.toggleMobileMenu)
-    document.addEventListener("click", this.closeMobileMenuOnOutsideClick)
-    window.addEventListener("scroll", this.handleScroll)
+    const hamburger = document.getElementById("hamburger")
+    const navMenu = document.getElementById("navMenu")
+
+    if (hamburger) {
+      hamburger.addEventListener("click", () => this.toggleMobileMenu())
+    }
+
+    document.addEventListener("click", (e) => this.closeMobileMenuOnOutsideClick(e))
+    window.addEventListener("scroll", () => this.handleScroll())
 
     // Smooth scrolling for navigation links
     document.querySelectorAll(".nav-link").forEach((link) => {
-      link.addEventListener("click", this.smoothScroll)
+      link.addEventListener("click", (e) => this.smoothScroll(e))
     })
 
     // Form submissions
-    document.getElementById("bookingForm").addEventListener("submit", this.handleBookingSubmit.bind(this))
-    document.getElementById("enquiryForm").addEventListener("submit", this.handleEnquirySubmit.bind(this))
-    document.getElementById("feedbackForm").addEventListener("submit", this.handleFeedbackSubmit.bind(this))
-    document.getElementById("quickContactForm").addEventListener("submit", this.handleQuickContactSubmit.bind(this))
+    const bookingForm = document.getElementById("bookingForm")
+    const enquiryForm = document.getElementById("enquiryForm")
+    const feedbackForm = document.getElementById("feedbackForm")
+    const quickContactForm = document.getElementById("quickContactForm")
+
+    if (bookingForm) {
+      bookingForm.addEventListener("submit", (e) => this.handleBookingSubmit(e))
+    }
+    if (enquiryForm) {
+      enquiryForm.addEventListener("submit", (e) => this.handleEnquirySubmit(e))
+    }
+    if (feedbackForm) {
+      feedbackForm.addEventListener("submit", (e) => this.handleFeedbackSubmit(e))
+    }
+    if (quickContactForm) {
+      quickContactForm.addEventListener("submit", (e) => this.handleQuickContactSubmit(e))
+    }
 
     // Modal controls
-    document.addEventListener("click", this.handleModalClicks.bind(this))
-    document.addEventListener("keydown", this.handleKeydown.bind(this))
+    document.addEventListener("click", (e) => this.handleModalClicks(e))
+    document.addEventListener("keydown", (e) => this.handleKeydown(e))
 
     // Form navigation
-    document.getElementById("nextStep").addEventListener("click", this.nextStep.bind(this))
-    document.getElementById("prevStep").addEventListener("click", this.prevStep.bind(this))
+    const nextStep = document.getElementById("nextStep")
+    const prevStep = document.getElementById("prevStep")
+
+    if (nextStep) {
+      nextStep.addEventListener("click", () => this.nextStep())
+    }
+    if (prevStep) {
+      prevStep.addEventListener("click", () => this.prevStep())
+    }
 
     // Service filters
     document.querySelectorAll(".filter-btn").forEach((btn) => {
-      btn.addEventListener("click", this.filterServices.bind(this))
+      btn.addEventListener("click", (e) => this.filterServices(e))
     })
 
     // Rating inputs
     document.querySelectorAll(".rating-input input").forEach((input) => {
-      input.addEventListener("change", this.updateRatingDisplay)
+      input.addEventListener("change", () => this.updateRatingDisplay())
     })
   }
 
@@ -57,15 +83,17 @@ class NananomFarms {
     const hamburger = document.getElementById("hamburger")
     const navMenu = document.getElementById("navMenu")
 
-    hamburger.classList.toggle("active")
-    navMenu.classList.toggle("active")
+    if (hamburger && navMenu) {
+      hamburger.classList.toggle("active")
+      navMenu.classList.toggle("active")
+    }
   }
 
   closeMobileMenuOnOutsideClick(e) {
     const hamburger = document.getElementById("hamburger")
     const navMenu = document.getElementById("navMenu")
 
-    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+    if (hamburger && navMenu && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
       hamburger.classList.remove("active")
       navMenu.classList.remove("active")
     }
@@ -73,9 +101,10 @@ class NananomFarms {
 
   handleScroll() {
     const navbar = document.getElementById("navbar")
-    const scrolled = window.scrollY > 50
-
-    navbar.classList.toggle("scrolled", scrolled)
+    if (navbar) {
+      const scrolled = window.scrollY > 50
+      navbar.classList.toggle("scrolled", scrolled)
+    }
 
     // Update active navigation link
     const sections = document.querySelectorAll("section[id]")
@@ -111,20 +140,29 @@ class NananomFarms {
     }
 
     // Close mobile menu
-    document.getElementById("hamburger").classList.remove("active")
-    document.getElementById("navMenu").classList.remove("active")
+    const hamburger = document.getElementById("hamburger")
+    const navMenu = document.getElementById("navMenu")
+    if (hamburger && navMenu) {
+      hamburger.classList.remove("active")
+      navMenu.classList.remove("active")
+    }
   }
 
   // Data Loading Methods
   async loadServices() {
     try {
       this.showLoading("servicesGrid")
-      const response = await fetch("../api/get_services.php")
-      const data = await response.json()
+      const response = await fetch("/api/get_services.php")
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      console.log(data, "services")
       if (data.success) {
         this.services = data.services
-        this.displayServices(data.services)
+        // this.displayServices(data.services)
         this.populateServiceSelect(data.services)
       } else {
         this.showToast("Failed to load services", "error")
@@ -137,80 +175,94 @@ class NananomFarms {
     }
   }
 
-  displayServices(services) {
-    const servicesGrid = document.getElementById("servicesGrid")
+  // displayServices(services) {
+  //   const servicesGrid = document.getElementById("servicesGrid")
 
-    if (!services || services.length === 0) {
-      servicesGrid.innerHTML = `
-                <div class="no-services">
-                    <i class="fas fa-info-circle"></i>
-                    <h3>No Services Available</h3>
-                    <p>Please check back later for our service offerings.</p>
-                </div>
-            `
-      return
-    }
+  //   if (!services || services.length === 0) {
+  //     servicesGrid.innerHTML = `
+  //       <div class="no-services">
+  //         <i class="fas fa-info-circle"></i>
+  //         <h3>No Services Available</h3>
+  //         <p>Please check back later for our service offerings.</p>
+  //       </div>
+  //     `
+  //     return
+  //   }
 
-    servicesGrid.innerHTML = services
-      .map(
-        (service) => `
-            <div class="service-card" data-category="${service.category || "general"}">
-                <div class="service-image">
-                    <i class="fas fa-${this.getServiceIcon(service.category)}"></i>
-                </div>
-                <div class="service-content">
-                    <h3 class="service-title">${this.escapeHtml(service.name)}</h3>
-                    <p class="service-description">${this.escapeHtml(service.description)}</p>
-                    <div class="service-price">
-                        <span class="price-amount">$${Number.parseFloat(service.price).toFixed(2)}</span>
-                        <span class="price-unit">per ${service.unit || "unit"}</span>
-                    </div>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Quality Guaranteed</li>
-                        <li><i class="fas fa-check"></i> Fast Delivery</li>
-                        <li><i class="fas fa-check"></i> Expert Support</li>
-                    </ul>
-                    <button class="btn btn-primary btn-full" onclick="app.bookService('${this.escapeHtml(service.name)}')">
-                        <i class="fas fa-calendar-plus"></i>
-                        Book Now
-                    </button>
-                </div>
-            </div>
-        `,
-      )
-      .join("")
-  }
+  //   servicesGrid.innerHTML = services
+  //     .map(
+  //       (service) => `
+  //         <div class="service-card" data-category="${service.category || "general"}">
+  //           <div class="service-image">
+  //             <i class="fas fa-${this.getServiceIcon(service.category)}"></i>
+  //           </div>
+  //           <div class="service-content">
+  //             <h3 class="service-title">${this.escapeHtml(service.name)}</h3>
+  //             <p class="service-description">${this.escapeHtml(service.description)}</p>
+  //             <div class="service-price">
+  //               <span class="price-amount">$${Number.parseFloat(service.price).toFixed(2)}</span>
+  //               <span class="price-unit">per ${service.unit || "unit"}</span>
+  //             </div>
+  //             <ul class="service-features">
+  //               <li><i class="fas fa-check"></i> Quality Guaranteed</li>
+  //               <li><i class="fas fa-check"></i> Fast Delivery</li>
+  //               <li><i class="fas fa-check"></i> Expert Support</li>
+  //             </ul>
+  //             <button class="btn btn-primary btn-full" onclick="app.bookService(${service.id}, '${this.escapeHtml(service.name)}')">
+  //               <i class="fas fa-calendar-plus"></i>
+  //               Book Now
+  //             </button>
+  //           </div>
+  //         </div>
+  //       `,
+  //     )
+  //     .join("")
+  // }
 
-  displayServiceError() {
-    const servicesGrid = document.getElementById("servicesGrid")
-    servicesGrid.innerHTML = `
-            <div class="service-error">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h3>Unable to Load Services</h3>
-                <p>There was an error loading our services. Please try again later.</p>
-                <button class="btn btn-primary" onclick="app.loadServices()">
-                    <i class="fas fa-refresh"></i>
-                    Retry
-                </button>
-            </div>
-        `
-  }
+  // displayServiceError() {
+  //   const servicesGrid = document.getElementById("servicesGrid")
+  //   servicesGrid.innerHTML = `
+  //     <div class="service-error">
+  //       <i class="fas fa-exclamation-triangle"></i>
+  //       <h3>Unable to Load Services</h3>
+  //       <p>There was an error loading our services. Please try again later.</p>
+  //       <button class="btn btn-primary" onclick="app.loadServices()">
+  //         <i class="fas fa-refresh"></i>
+  //         Retry
+  //       </button>
+  //     </div>
+  //   `
+  // }
 
   populateServiceSelect(services) {
-    const serviceSelect = document.getElementById("service")
-    serviceSelect.innerHTML = '<option value="">Choose a service...</option>'
+    const serviceSelects = [document.getElementById("service"), document.getElementById("feedbackService")]
 
-    services.forEach((service) => {
-      const option = document.createElement("option")
-      option.value = service.name
-      option.textContent = `${service.name} - $${Number.parseFloat(service.price).toFixed(2)}/${service.unit}`
-      serviceSelect.appendChild(option)
+    serviceSelects.forEach((serviceSelect) => {
+      if (serviceSelect) {
+        const isBookingForm = serviceSelect.id === "service"
+        serviceSelect.innerHTML = isBookingForm
+          ? '<option value="">Choose a service...</option>'
+          : '<option value="">Select service...</option>'
+
+        services.forEach((service) => {
+          const option = document.createElement("option")
+          option.value = service.id // Use numeric service ID
+          option.dataset.serviceName = service.name
+          option.textContent = `${service.name} - $${Number.parseFloat(service.price).toFixed(2)}/${service.unit}`
+          serviceSelect.appendChild(option)
+        })
+      }
     })
   }
 
   async loadTestimonials() {
     try {
-      const response = await fetch("../api/get_feedback.php")
+      const response = await fetch("/api/get_feedback.php")
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
       const data = await response.json()
 
       if (data.success && data.feedback.length > 0) {
@@ -226,27 +278,28 @@ class NananomFarms {
 
   displayTestimonials(testimonials) {
     const testimonialsGrid = document.getElementById("testimonialsGrid")
+    if (!testimonialsGrid) return
 
     testimonialsGrid.innerHTML = testimonials
       .map(
         (testimonial) => `
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    ${this.escapeHtml(testimonial.message)}
-                </div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">
-                        ${(testimonial.customer_name || "A").charAt(0).toUpperCase()}
-                    </div>
-                    <div class="author-info">
-                        <h5>${this.escapeHtml(testimonial.customer_name || "Anonymous")}</h5>
-                        <span>Verified Customer</span>
-                        <div class="testimonial-rating">
-                            ${this.generateStars(testimonial.rating || 5)}
-                        </div>
-                    </div>
-                </div>
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              ${this.escapeHtml(testimonial.comment || testimonial.message)}
             </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                ${(testimonial.customer_name || "A").charAt(0).toUpperCase()}
+              </div>
+              <div class="author-info">
+                <h5>${this.escapeHtml(testimonial.customer_name || "Anonymous")}</h5>
+                <span>Verified Customer</span>
+                <div class="testimonial-rating">
+                  ${this.generateStars(testimonial.rating || 5)}
+                </div>
+              </div>
+            </div>
+          </div>
         `,
       )
       .join("")
@@ -254,6 +307,8 @@ class NananomFarms {
 
   displayDefaultTestimonials() {
     const testimonialsGrid = document.getElementById("testimonialsGrid")
+    if (!testimonialsGrid) return
+
     const defaultTestimonials = [
       {
         message:
@@ -281,23 +336,23 @@ class NananomFarms {
     testimonialsGrid.innerHTML = defaultTestimonials
       .map(
         (testimonial) => `
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    ${testimonial.message}
-                </div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">
-                        ${testimonial.author.charAt(0)}
-                    </div>
-                    <div class="author-info">
-                        <h5>${testimonial.author}</h5>
-                        <span>${testimonial.company}</span>
-                        <div class="testimonial-rating">
-                            ${this.generateStars(testimonial.rating)}
-                        </div>
-                    </div>
-                </div>
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              ${testimonial.message}
             </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                ${testimonial.author.charAt(0)}
+              </div>
+              <div class="author-info">
+                <h5>${testimonial.author}</h5>
+                <span>${testimonial.company}</span>
+                <div class="testimonial-rating">
+                  ${this.generateStars(testimonial.rating)}
+                </div>
+              </div>
+            </div>
+          </div>
         `,
       )
       .join("")
@@ -314,18 +369,40 @@ class NananomFarms {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
 
+    // Debug: Log the form data
+    console.log("Form data:", data)
+
+    // Ensure data matches API expectations exactly
+    const bookingData = {
+      customer_name: data.customer_name,
+      customer_email: data.customer_email,
+      customer_phone: data.customer_phone,
+      service_id: Number.parseInt(data.service_id), // Ensure it's an integer
+      booking_date: data.booking_date,
+      booking_time: data.booking_time,
+      notes: data.notes || "",
+    }
+
+    // Debug: Log the booking data being sent
+    console.log("Booking data being sent:", bookingData)
+
     try {
       this.showButtonLoading(e.target.querySelector('button[type="submit"]'))
 
-      const response = await fetch("../api/create_booking.php", {
+      const response = await fetch("/api/create_booking.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(bookingData),
       })
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
       const result = await response.json()
+      console.log("API Response:", result)
 
       if (result.success) {
         this.showToast("Booking submitted successfully! We will contact you soon.", "success")
@@ -349,16 +426,29 @@ class NananomFarms {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
 
+    // Ensure data matches API expectations exactly
+    const enquiryData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone || "",
+      subject: data.subject,
+      message: data.message,
+    }
+
     try {
       this.showButtonLoading(e.target.querySelector('button[type="submit"]'))
 
-      const response = await fetch("../api/create_enquiry.php", {
+      const response = await fetch("/api/create_enquiry.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(enquiryData),
       })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
 
       const result = await response.json()
 
@@ -383,16 +473,29 @@ class NananomFarms {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
 
+    // Ensure data matches API expectations exactly
+    const feedbackData = {
+      customer_name: data.customer_name,
+      customer_email: data.customer_email,
+      service_id: Number.parseInt(data.service_id), // Convert to integer
+      rating: Number.parseInt(data.rating), // Convert to integer
+      comment: data.comment,
+    }
+
     try {
       this.showButtonLoading(e.target.querySelector('button[type="submit"]'))
 
-      const response = await fetch("../api/create_feedback.php", {
+      const response = await fetch("/api/create_feedback.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(feedbackData),
       })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
 
       const result = await response.json()
 
@@ -418,16 +521,29 @@ class NananomFarms {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
 
+    // Use enquiry API for quick contact form
+    const contactData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone || "",
+      subject: data.subject,
+      message: data.message,
+    }
+
     try {
       this.showButtonLoading(e.target.querySelector('button[type="submit"]'))
 
-      const response = await fetch("../api/create_enquiry.php", {
+      const response = await fetch("/api/create_enquiry.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(contactData),
       })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
 
       const result = await response.json()
 
@@ -448,39 +564,51 @@ class NananomFarms {
   // Modal Methods
   openBookingModal() {
     const modal = document.getElementById("bookingModal")
-    modal.classList.add("active")
-    document.body.style.overflow = "hidden"
+    if (modal) {
+      modal.classList.add("active")
+      document.body.style.overflow = "hidden"
+    }
   }
 
   closeBookingModal() {
     const modal = document.getElementById("bookingModal")
-    modal.classList.remove("active")
-    document.body.style.overflow = ""
-    this.resetFormSteps()
+    if (modal) {
+      modal.classList.remove("active")
+      document.body.style.overflow = ""
+      this.resetFormSteps()
+    }
   }
 
   openEnquiryModal() {
     const modal = document.getElementById("enquiryModal")
-    modal.classList.add("active")
-    document.body.style.overflow = "hidden"
+    if (modal) {
+      modal.classList.add("active")
+      document.body.style.overflow = "hidden"
+    }
   }
 
   closeEnquiryModal() {
     const modal = document.getElementById("enquiryModal")
-    modal.classList.remove("active")
-    document.body.style.overflow = ""
+    if (modal) {
+      modal.classList.remove("active")
+      document.body.style.overflow = ""
+    }
   }
 
   openFeedbackModal() {
     const modal = document.getElementById("feedbackModal")
-    modal.classList.add("active")
-    document.body.style.overflow = "hidden"
+    if (modal) {
+      modal.classList.add("active")
+      document.body.style.overflow = "hidden"
+    }
   }
 
   closeFeedbackModal() {
     const modal = document.getElementById("feedbackModal")
-    modal.classList.remove("active")
-    document.body.style.overflow = ""
+    if (modal) {
+      modal.classList.remove("active")
+      document.body.style.overflow = ""
+    }
   }
 
   handleModalClicks(e) {
@@ -526,16 +654,25 @@ class NananomFarms {
     })
 
     // Show current step
-    document.querySelector(`[data-step="${this.currentStep}"]`).classList.add("active")
+    const currentStepElement = document.querySelector(`[data-step="${this.currentStep}"]`)
+    if (currentStepElement) {
+      currentStepElement.classList.add("active")
+    }
 
     // Update navigation buttons
     const prevBtn = document.getElementById("prevStep")
     const nextBtn = document.getElementById("nextStep")
     const submitBtn = document.getElementById("submitBooking")
 
-    prevBtn.style.display = this.currentStep > 1 ? "block" : "none"
-    nextBtn.style.display = this.currentStep < this.maxSteps ? "block" : "none"
-    submitBtn.style.display = this.currentStep === this.maxSteps ? "block" : "none"
+    if (prevBtn) {
+      prevBtn.style.display = this.currentStep > 1 ? "block" : "none"
+    }
+    if (nextBtn) {
+      nextBtn.style.display = this.currentStep < this.maxSteps ? "block" : "none"
+    }
+    if (submitBtn) {
+      submitBtn.style.display = this.currentStep === this.maxSteps ? "block" : "none"
+    }
   }
 
   resetFormSteps() {
@@ -545,6 +682,8 @@ class NananomFarms {
 
   validateCurrentStep() {
     const currentStepElement = document.querySelector(`[data-step="${this.currentStep}"]`)
+    if (!currentStepElement) return true
+
     const requiredFields = currentStepElement.querySelectorAll("[required]")
     let isValid = true
 
@@ -566,6 +705,8 @@ class NananomFarms {
 
   validateBookingForm() {
     const form = document.getElementById("bookingForm")
+    if (!form) return true
+
     const requiredFields = form.querySelectorAll("[required]")
     let isValid = true
 
@@ -579,14 +720,14 @@ class NananomFarms {
     })
 
     // Validate email
-    const emailField = form.querySelector('[type="email"]')
+    const emailField = form.querySelector('[name="customer_email"]')
     if (emailField && emailField.value && !this.isValidEmail(emailField.value)) {
       emailField.classList.add("error")
       isValid = false
     }
 
     // Validate date
-    const dateField = form.querySelector('[type="date"]')
+    const dateField = form.querySelector('[name="booking_date"]')
     if (dateField && dateField.value) {
       const selectedDate = new Date(dateField.value)
       const today = new Date()
@@ -603,8 +744,11 @@ class NananomFarms {
   }
 
   // Service Methods
-  bookService(serviceName) {
-    document.getElementById("service").value = serviceName
+  bookService(serviceId, serviceName) {
+    const serviceSelect = document.getElementById("service")
+    if (serviceSelect) {
+      serviceSelect.value = serviceId // This should now be a numeric ID
+    }
     this.openBookingModal()
   }
 
@@ -632,7 +776,7 @@ class NananomFarms {
   // Utility Methods
   setMinDate() {
     const today = new Date().toISOString().split("T")[0]
-    const dateInput = document.getElementById("appointmentDate")
+    const dateInput = document.getElementById("bookingDate")
     if (dateInput) {
       dateInput.setAttribute("min", today)
     }
@@ -642,11 +786,11 @@ class NananomFarms {
     const element = document.getElementById(elementId)
     if (element) {
       element.innerHTML = `
-                <div class="loading-container">
-                    <div class="spinner"></div>
-                    <p>Loading...</p>
-                </div>
-            `
+        <div class="loading-container">
+          <div class="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      `
     }
   }
 
@@ -667,13 +811,17 @@ class NananomFarms {
 
   hideLoadingOverlay() {
     const overlay = document.getElementById("loadingOverlay")
-    setTimeout(() => {
-      overlay.classList.remove("active")
-    }, 1000)
+    if (overlay) {
+      setTimeout(() => {
+        overlay.classList.remove("active")
+      }, 1000)
+    }
   }
 
   showToast(message, type = "info") {
     const toast = document.getElementById("toast")
+    if (!toast) return
+
     const toastIcon = toast.querySelector(".toast-icon")
     const toastMessage = toast.querySelector(".toast-message")
 
@@ -684,8 +832,13 @@ class NananomFarms {
       info: "fas fa-info-circle",
     }
 
-    toastIcon.className = `toast-icon ${icons[type]}`
-    toastMessage.textContent = message
+    if (toastIcon) {
+      toastIcon.className = `toast-icon ${icons[type]}`
+    }
+    if (toastMessage) {
+      toastMessage.textContent = message
+    }
+
     toast.className = `toast ${type}`
 
     // Show toast
@@ -699,7 +852,9 @@ class NananomFarms {
 
   closeToast() {
     const toast = document.getElementById("toast")
-    toast.classList.remove("show")
+    if (toast) {
+      toast.classList.remove("show")
+    }
   }
 
   updateRatingDisplay() {
@@ -834,8 +989,8 @@ function closeToast() {
   app.closeToast()
 }
 
-function bookService(serviceName) {
-  app.bookService(serviceName)
+function bookService(serviceId, serviceName) {
+  app.bookService(serviceId, serviceName)
 }
 
 // Initialize the application

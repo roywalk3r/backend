@@ -74,7 +74,7 @@ $feedback = $feedbackManager->getAllFeedback($page, 20, $search, $rating, $statu
                 <?php endif; ?>
 
                 <!-- Filters -->
-                <div class="card mb-4">
+                <div class="card mb-4 primary">
                     <div class="card-body">
                         <form method="GET" class="row g-3">
                             <div class="col-md-4">

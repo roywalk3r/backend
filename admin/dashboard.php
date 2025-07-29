@@ -21,7 +21,6 @@ $conn = getMysqliConnection();
 $serviceManager = new ServiceManager($auth);
 $bookingManager = new BookingManager();
 $enquiryManager = new EnquiryManager();
-
 // Get dashboard statistics
 $stats = [];
 
@@ -67,11 +66,6 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-    .sidebar {
-        min-height: 100vh;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
     .sidebar .nav-link {
         color: rgba(255, 255, 255, 0.8);
         padding: 0.75rem 1rem;
@@ -86,28 +80,16 @@ try {
         background: rgba(255, 255, 255, 0.1);
     }
 
-    .stat-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: 15px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-        transition: transform 0.3s ease;
-    }
 
-    .stat-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .stat-card .stat-number {
-        font-size: 2rem;
-        font-weight: bold;
-    }
 
     .card {
         border: none;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background: antiquewhite;
     }
 
     .table th {
@@ -145,6 +127,7 @@ try {
             <div class="col-md-9 col-lg-10 p-4">
                 <!-- Header -->
                 <?php include 'includes/header.php'; ?>
+                <?php include 'includes/welcome.php'; ?>
 
                 <!-- Statistics Cards -->
                 <div class="row mb-4">
@@ -248,7 +231,9 @@ try {
                                 <div class="activity-item">
                                     <div class="d-flex justify-content-between align-items-start">
                                         <div>
-                                            <h6 class="mb-1"><?php echo htmlspecialchars($enquiry['name']); ?></h6>
+                                            <h6 class="mb-1">
+                                                <?php echo htmlspecialchars($enquiry['first_name'] . ' ' . $enquiry['last_name']); ?>
+                                            </h6>
                                             <p class="mb-1 text-muted">
                                                 <?php echo htmlspecialchars(substr($enquiry['subject'], 0, 50)) . '...'; ?>
                                             </p>

@@ -93,7 +93,7 @@ class Auth {
             ");
             
             if (!$stmt) {
-                throw new Exception("Database prepare failed: " . $this->conn->error);
+                throw new \Exception("Database prepare failed: " . $this->conn->error);
             }
             
             $stmt->bind_param("s", $email);
@@ -148,7 +148,7 @@ class Auth {
                     'message' => 'Invalid email or password'
                 ];
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Login error: " . $e->getMessage());
             return [
                 'success' => false,
@@ -203,7 +203,7 @@ class Auth {
                 'success' => true,
                 'message' => 'Logged out successfully'
             ];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Logout error: " . $e->getMessage());
             return [
                 'success' => false,
@@ -281,7 +281,7 @@ class Auth {
             }
             
             return null;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Get current user error: " . $e->getMessage());
             return null;
         }
@@ -368,7 +368,7 @@ class Auth {
             ");
             $stmt->bind_param("sss", $email, $ip, $userAgent);
             $stmt->execute();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Record failed attempt error: " . $e->getMessage());
         }
     }
@@ -383,7 +383,7 @@ class Auth {
             $stmt = $this->conn->prepare("DELETE FROM login_attempts WHERE username = ?");
             $stmt->bind_param("s", $email);
             $stmt->execute();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Clear failed attempts error: " . $e->getMessage());
         }
     }
@@ -407,7 +407,7 @@ class Auth {
             $row = $result->fetch_assoc();
             
             return $row['attempts'] >= $this->maxLoginAttempts;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Check account lock error: " . $e->getMessage());
             return false;
         }
@@ -429,7 +429,7 @@ class Auth {
             
             // Set secure cookie
             setcookie('remember_token', $token, time() + (30 * 24 * 60 * 60), '/', '', isset($_SERVER['HTTPS']), true);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Set remember me token error: " . $e->getMessage());
         }
     }
@@ -444,7 +444,7 @@ class Auth {
             $stmt = $this->conn->prepare("UPDATE users SET remember_token = NULL WHERE id = ?");
             $stmt->bind_param("i", $userId);
             $stmt->execute();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Clear remember me token error: " . $e->getMessage());
         }
     }
@@ -459,11 +459,110 @@ class Auth {
             $stmt = $this->conn->prepare("UPDATE users SET last_login = NOW() WHERE id = ?");
             $stmt->bind_param("i", $userId);
             $stmt->execute();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Update last login error: " . $e->getMessage());
         }
     }
-    
+     /**
+     * Register a new customer
+     * 
+     * @param array $data Customer registration data
+     * @return array Result array with success status and message
+     */
+    public function registerCustomer($data) {
+        try {
+            // Validate required fields
+            $required = ['first_name', 'last_name', 'email', 'phone', 'password'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    return [
+                        'success' => false,
+                        'message' => ucfirst(str_replace('_', ' ', $field)) . ' is required'
+                    ];
+                }
+            }
+            
+            // Validate email format
+            if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                return [
+                    'success' => false,
+                    'message' => 'Invalid email format'
+                ];
+            }
+            
+            // Check if email already exists
+            $stmt = $this->conn->prepare("SELECT id FROM users WHERE email = ?");
+            $stmt->bind_param("s", $data['email']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows > 0) {
+                return [
+                    'success' => false,
+                    'message' => 'An account with this email already exists'
+                ];
+            }
+            
+            // Get customer role ID
+            $stmt = $this->conn->prepare("SELECT id FROM roles WHERE name = 'customer'");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $role = $result->fetch_assoc();
+            
+            if (!$role) {
+                // Create customer role if it doesn't exist
+                $stmt = $this->conn->prepare("INSERT INTO roles (name, description) VALUES ('customer', 'Customer role')");
+                $stmt->execute();
+                $roleId = $this->conn->insert_id;
+            } else {
+                $roleId = $role['id'];
+            }
+            
+            // Hash password
+            $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+            
+            // Insert new customer
+            $stmt = $this->conn->prepare("
+                INSERT INTO users (first_name, last_name, email, phone, password, role_id, is_active, created_at) 
+                VALUES (?, ?, ?, ?, ?, ?, 1, NOW())
+            ");
+            
+            $stmt->bind_param(
+                "sssssi",
+                $data['first_name'],
+                $data['last_name'],
+                $data['email'],
+                $data['phone'],
+                $hashedPassword,
+                $roleId
+            );
+            
+            if ($stmt->execute()) {
+                $userId = $this->conn->insert_id;
+                
+                // Log registration activity
+                $this->logActivity($userId, 'register', 'users', $userId);
+                
+                return [
+                    'success' => true,
+                    'message' => 'Registration successful',
+                    'user_id' => $userId
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'message' => 'Failed to create account'
+                ];
+            }
+            
+        } catch (\Exception $e) {
+            error_log("Customer registration error: " . $e->getMessage());
+            return [
+                'success' => false,
+                'message' => 'Registration failed. Please try again.'
+            ];
+        }
+    }
     /**
      * Log user activity for audit trail
      * 
@@ -489,8 +588,20 @@ class Auth {
             
             $stmt->bind_param("ississss", $userId, $action, $tableName, $recordId, $oldValuesJson, $newValuesJson, $ip, $userAgent);
             $stmt->execute();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Log activity error: " . $e->getMessage());
+        }
+    }
+    public function isCustomer() {
+        // Check if the logged-in user is a customer
+        return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'customer';
+    }
+    public function isNotAuthorized(){
+        // Check if the user is not authorized
+        if ($this->isCustomer()) {
+            $this->logout();
+            header('Location: 403.php');
+            exit();
         }
     }
 }

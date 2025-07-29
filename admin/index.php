@@ -43,11 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
     body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #fff;
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 100%;
     }
 
     .login-card {
@@ -60,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .login-header {
-        background: linear-gradient(135deg, #28a745, #20c997);
+        background: #000;
         color: white;
         padding: 2rem;
         text-align: center;
@@ -68,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     .login-body {
         padding: 2rem;
+        background-color: #EFD6A7;
     }
 
     .form-control {
@@ -75,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         border: 2px solid #e9ecef;
         padding: 12px 15px;
         transition: all 0.3s ease;
+        background: #f165D6;
     }
 
     .form-control:focus {
@@ -83,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .btn-login {
-        background: linear-gradient(135deg, #28a745, #20c997);
+        background: #31610D;
         border: none;
         border-radius: 10px;
         padding: 12px;
@@ -111,13 +119,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         border-left: none;
     }
 
-    .default-credentials {
+    /* .default-credentials {
         background: #f8f9fa;
         border-radius: 10px;
         padding: 1rem;
         margin-bottom: 1rem;
         font-size: 0.9rem;
-    }
+    } */
     </style>
 </head>
 
@@ -127,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-6">
                 <div class="login-card">
                     <div class="login-header">
-                        <i class="fas fa-leaf fa-3x mb-3"></i>
+                        <img src="assets/logo.png" alt="Logo" class="mb-3">
                         <h3>Nananom Farms</h3>
                         <p class="mb-0">Admin Dashboard</p>
                     </div>
@@ -145,12 +153,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php echo htmlspecialchars($success_message); ?>
                         </div>
                         <?php endif; ?>
-
+                        <!-- 
                         <div class="default-credentials">
                             <strong>Default Login:</strong><br>
                             Email: admin@nananomfarms.com<br>
                             Password: admin123
-                        </div>
+                        </div> -->
 
                         <form method="POST" action="">
                             <div class="mb-3">

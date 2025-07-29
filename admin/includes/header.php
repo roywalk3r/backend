@@ -5,6 +5,9 @@ use App\Auth;
 $auth = new Auth();
 $auth->requireAuth();
 $user = $auth->getCurrentUser();
+$auth->isNotAuthorized();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

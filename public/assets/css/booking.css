@@ -1,0 +1,536 @@
+/* Section: Why Book With Us */
+.booking-reasons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #efd6a7;
+  border-radius: 20px;
+  padding: 40px 20px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 40px auto;
+}
+
+.booking-reasons h2 {
+  color: #31610d;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.booking-reasons p.subtitle {
+  color: #31610d;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.booking-reasons ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.booking-reasons li {
+  display: flex;
+
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #000;
+  letter-spacing: 0.1px;
+}
+
+.booking-reasons li svg {
+  flex-shrink: 0;
+  margin-right: 20px;
+  width: 41px;
+  height: 42px;
+}
+
+@media (max-width: 768px) {
+  .booking-reasons h2 {
+    font-size: 28px;
+  }
+  .booking-reasons p.subtitle {
+    font-size: 18px;
+  }
+  .booking-reasons li {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-reasons li svg {
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+  }
+  .booking-reasons li {
+    font-size: 18px;
+  }
+}
+
+/* Redesigned Booking Reasons */
+.booking-reasons.redesigned,
+.how-it-works.redesigned,
+.faq.redesigned {
+  max-width: 1400px;
+  width: 100%;
+}
+
+.booking-reasons.redesigned {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #efd6a7;
+  border-radius: 24px;
+  padding: 48px 24px;
+  margin: 48px auto 32px auto;
+  box-shadow: 0 4px 32px rgba(49, 97, 13, 0.07);
+}
+.booking-reasons.redesigned h2 {
+  color: #31610d;
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.booking-reasons.redesigned .subtitle {
+  color: #31610d;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 32px;
+  opacity: 0.9;
+}
+.reasons-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px 36px;
+  width: 100%;
+}
+.reason {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f1dcb5;
+  border-radius: 16px;
+  box-shadow: 0 1px 8px rgba(49, 97, 13, 0.09);
+  padding: 18px 32px;
+  font-size: 1.1rem;
+  color: #31610d;
+  font-weight: 600;
+  min-width: 240px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.reason:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(49, 97, 13, 0.13);
+}
+.reason .icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Section: How It Works */
+.how-it-works {
+  position: relative;
+  background: #efd6a7;
+  border-radius: 20px;
+  padding: 40px 20px;
+  max-width: 1290px;
+  margin: 40px auto;
+}
+
+.how-it-works h2 {
+  color: #31610d;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.how-it-works p.subtitle {
+  color: #31610d;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.how-it-works .step {
+  margin-bottom: 40px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.how-it-works .step h3 {
+  font-size: 22px;
+  color: #31610d;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.how-it-works .step p {
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+}
+
+/* Redesigned How It Works */
+.how-it-works.redesigned {
+  background: var(--primary-color);
+  border-radius: 24px;
+  padding: 48px 24px;
+  margin: 40px auto 32px auto;
+  box-shadow: 0 4px 32px rgba(49, 97, 13, 0.07);
+}
+.how-it-works.redesigned h2 {
+  color: #31610d;
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.how-it-works.redesigned .subtitle {
+  color: #31610d;
+  font-size: 1.15rem;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 800px;
+}
+.steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: #f1dcb5;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 8px rgba(49, 97, 13, 0.08);
+  padding: 22px 30px;
+  transition: box-shadow 0.15s;
+}
+.steps li:last-child {
+  margin-bottom: 0;
+}
+.step-num {
+  background: #31610d;
+  color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.step-content strong {
+  color: #31610d;
+  font-size: 1.13rem;
+  margin-bottom: 2px;
+}
+.step-content span {
+  color: #000;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .how-it-works h2 {
+    font-size: 20px;
+  }
+  .how-it-works p.subtitle,
+  .how-it-works .step p {
+    font-size: 16px;
+  }
+  .how-it-works .step h3 {
+    font-size: 22px;
+  }
+}
+
+/* FAQ Section */
+.faq.redesigned {
+  background: #efd6a7;
+  border-radius: 24px;
+  padding: 48px 24px;
+  margin: 40px auto 32px auto;
+  box-shadow: 0 4px 32px rgba(49, 97, 13, 0.07);
+}
+.faq.redesigned h2 {
+  color: #31610d;
+  font-size: 2.1rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 18px;
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0 auto;
+  max-width: 700px;
+}
+.faq-list details {
+  max-width: 100%;
+  background: #f1dcb5;
+  border-radius: 14px;
+  box-shadow: 0 1px 8px rgba(49, 97, 13, 0.08);
+  padding: 0;
+  transition: box-shadow 0.15s;
+  overflow: hidden;
+}
+.faq-list details[open] {
+  box-shadow: 0 6px 24px rgba(49, 97, 13, 0.13);
+}
+.faq-list summary {
+  cursor: pointer;
+  padding: 20px 28px;
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #31610d;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.13s;
+}
+.faq-list summary::after {
+  content: "\25BC";
+  color: #31610d;
+  font-size: 1.2em;
+  margin-left: auto;
+  transition: transform 0.2s;
+}
+.faq-list details[open] summary::after {
+  transform: rotate(-180deg);
+}
+.faq-answer {
+  padding: 0 28px 20px 28px;
+  font-size: 1rem;
+  color: #444;
+  background: #f1dcb5;
+  border-radius: 0 0 14px 14px;
+  animation: fadeIn 0.3s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-flex {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 1400px;
+  width: 100%;
+  margin: 40px auto 32px auto;
+}
+.info-flex > section {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.how-it-works.redesigned, .faq.redesigned {
+  margin: 0;
+  box-shadow: 0 4px 32px rgba(49, 97, 13, 0.07);
+}
+@media (max-width: 1100px) {
+  .info-flex {
+    flex-direction: column;
+    gap: 32px;
+    max-width: 98vw;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .booking-reasons.redesigned,
+  .how-it-works.redesigned,
+  .faq.redesigned {
+    padding: 34px 6vw;
+  }
+  .reasons-list {
+    gap: 18px 16px;
+  }
+  .steps li {
+    padding: 14px 10px;
+  }
+}
+@media (max-width: 600px) {
+  .booking-reasons.redesigned,
+  .how-it-works.redesigned,
+  .faq.redesigned {
+    padding: 20px 2vw;
+    border-radius: 14px;
+  }
+  .reason {
+    padding: 12px 10px;
+    font-size: 0.97rem;
+  }
+  .steps li {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 4px;
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  .faq-list summary {
+    padding: 14px 12px;
+    font-size: 1rem;
+  }
+  .faq-answer {
+    padding: 0 12px 12px 12px;
+    font-size: 0.96rem;
+  }
+}
+
+/* =========================
+   CONTACT INFORMATION SECTION
+   Modern, clean, and inviting styles
+========================= */
+.contact-info-section {
+  background: linear-gradient(90deg, #efd6a7 0%, #f1dcb5 100%);
+  border-radius: 24px;
+  box-shadow: 0 4px 32px rgba(49, 97, 13, 0.08);
+  max-width: 1400px;
+  width: 100%;
+  margin: 48px auto 32px auto;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.contact-info-section h2 {
+  color: #31610d;
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+.contact-info-section .contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 64px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+.contact-info-section .contact-card {
+  background: #fffbe7;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(49, 97, 13, 0.10);
+  padding: 32px 36px;
+  min-width: 260px;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.contact-info-section .contact-card:hover {
+  box-shadow: 0 8px 32px rgba(49, 97, 13, 0.16);
+  transform: translateY(-6px) scale(1.03);
+}
+.contact-info-section .contact-card .icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 6px;
+  color: #407c12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+.contact-info-section .contact-card .label {
+  color: #31610d;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+}
+.contact-info-section .contact-card .value {
+  color: #222;
+  font-size: 1.15rem;
+  font-weight: 500;
+  word-break: break-all;
+}
+.contact-info-section .contact-card a {
+  color: #407c12;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.contact-info-section .contact-card a:hover {
+  color: #31610d;
+  text-decoration: underline;
+}
+@media (max-width: 900px) {
+  .contact-info-section {
+    padding: 32px 8vw;
+    border-radius: 16px;
+  }
+  .contact-info-section .contact-details {
+    gap: 24px 0;
+  }
+  .contact-info-section .contact-card {
+    min-width: 220px;
+    padding: 22px 12px;
+  }
+}
+@media (max-width: 600px) {
+  .contact-info-section {
+    padding: 18px 2vw;
+    border-radius: 12px;
+    gap: 18px;
+  }
+  .contact-info-section h2 {
+    font-size: 1.5rem;
+  }
+  .contact-info-section .contact-details {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .contact-info-section .contact-card {
+    min-width: 0;
+    width: 100%;
+    padding: 12px 6px;
+  }
+}

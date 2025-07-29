@@ -7,47 +7,61 @@ use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader (created by composer, not included with PHPMailer)
 require 'vendor/autoload.php';
-require_once __DIR__ . '/config.php'; // to use env()
+require_once __DIR__ . '/env.php'; // to use env()
 
 function createMailer(): PHPMailer {
-    $mail = new PHPMailer(true); // Enable exceptions
+    $mail = new PHPMailer(true);
 
     try {
-        // Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_CONNECTION;  // Show connection details
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->isSMTP();
-        
-        // Gmail SMTP configuration
-        $mail->Host = env('MAIL_HOST', 'smtp.gmail.com');
-        $mail->SMTPAuth = true;
-        $mail->Username = env('MAIL_USERNAME');
-        $mail->Password = env('MAIL_PASSWORD');
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = env('MAIL_PORT', 587);  // TLS port
-        
-        // Sender
-        $mail->setFrom(env('MAIL_FROM_ADDRESS', 'testpjmail@gmail.com'), env('MAIL_FROM_NAME', 'Nananom Farms'), 'Nananom Farms');
-        
-        // Debug output to error log
-        $mail->Debugoutput = function($str, $level) {
+
+        $host = env('MAIL_HOST', 'localhost');
+        $port = env('MAIL_PORT', 1025);
+        $mail->Host = $host;
+        $mail->Port = $port;
+
+        // Use auth only if username is provided
+        $username = env('MAIL_USERNAME');
+        $password = env('MAIL_PASSWORD');
+
+        if (!empty($username)) {
+            $mail->SMTPAuth = true;
+            $mail->Username = $username;
+            $mail->Password = $password;
+        } else {
+            $mail->SMTPAuth = false;
+        }
+
+        // Set encryption based on host
+        if (str_contains($host, 'gmail.com')) {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        } else {
+            $mail->SMTPSecure = false; // Mailpit or local SMTP
+        }
+
+        $mail->setFrom(
+            env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+            env('MAIL_FROM_NAME', 'Nananom')
+        );
+
+        $mail->Debugoutput = function ($str, $level) {
             error_log("Mail debug (level $level): $str");
         };
-        
-        // Timeout settings
-        $mail->Timeout = 10;  // 10 second timeout
-        
-        // SSL/TLS settings
+
+        $mail->Timeout = 10;
+
+        // Disable SSL verification for local testing (Mailpit)
         $mail->SMTPOptions = [
             'ssl' => [
-                'verify_peer' => true,
-                'verify_peer_name' => true,
-                'allow_self_signed' => false,
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
             ]
         ];
 
     } catch (Exception $e) {
         error_log("Mailer Error: " . $e->getMessage());
-        error_log("SMTP Error: " . ($mail->ErrorInfo ?? 'No error info available'));
         throw new Exception("Failed to create mailer: " . $e->getMessage());
     }
 

@@ -99,6 +99,7 @@ try {
                 phone VARCHAR(20),
                 role_id INT DEFAULT 3,
                 is_active BOOLEAN DEFAULT TRUE,
+                newsletter BOOLEAN DEFAULT FALSE,
                 remember_token VARCHAR(255),
                 last_login TIMESTAMP NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

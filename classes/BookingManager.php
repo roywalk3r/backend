@@ -108,7 +108,7 @@ class BookingManager {
                 ]
             ];
             
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Error getting bookings: " . $e->getMessage());
             return [
                 'success' => false,
@@ -150,7 +150,7 @@ class BookingManager {
                     'message' => 'Booking not found'
                 ];
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Error getting booking: " . $e->getMessage());
             return [
                 'success' => false,
@@ -194,7 +194,7 @@ class BookingManager {
                     'message' => 'Error updating booking status: ' . $stmt->error
                 ];
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Error updating booking status: " . $e->getMessage());
             return [
                 'success' => false,
@@ -241,7 +241,7 @@ class BookingManager {
                     'message' => 'Error assigning booking: ' . $stmt->error
                 ];
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Error assigning booking: " . $e->getMessage());
             return [
                 'success' => false,
@@ -252,8 +252,8 @@ class BookingManager {
     
     public function createBooking($data) {
         try {
-            // Validate required fields
-            $required = ['first_name', 'last_name', 'email', 'service_id', 'booking_date'];
+            // Validate required fields - updated to match API expectations
+            $required = ['customer_name', 'customer_email', 'customer_phone', 'service_id', 'booking_date', 'booking_time'];
             foreach ($required as $field) {
                 if (empty($data[$field])) {
                     return [
@@ -280,19 +280,25 @@ class BookingManager {
             $quantity = $data['quantity'] ?? 1;
             $totalAmount = $service['price'] * $quantity;
             
+            // Split customer_name into first_name and last_name for database storage
+            $nameParts = explode(' ', trim($data['customer_name']), 2);
+            $firstName = $nameParts[0];
+            $lastName = isset($nameParts[1]) ? $nameParts[1] : '';
+            
             $stmt = $this->conn->prepare("
                 INSERT INTO bookings (first_name, last_name, email, phone, service_id, booking_date, booking_time, quantity, total_amount, status, notes) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?)
             ");
             
-            $phone = $data['phone'] ?? null;
-            $bookingTime = $data['booking_time'] ?? '09:00:00';
-            $notes = $data['notes'] ?? null;
+            $phone = $data['customer_phone'];
+            $email = $data['customer_email'];
+            $bookingTime = $data['booking_time'];
+            $notes = $data['notes'] ?? '';
             
             $stmt->bind_param("ssssssssds", 
-                $data['first_name'], 
-                $data['last_name'], 
-                $data['email'], 
+                $firstName, 
+                $lastName, 
+                $email, 
                 $phone,
                 $data['service_id'],
                 $data['booking_date'],
@@ -314,7 +320,7 @@ class BookingManager {
                     'message' => 'Error creating booking: ' . $stmt->error
                 ];
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Error creating booking: " . $e->getMessage());
             return [
                 'success' => false,
@@ -411,7 +417,7 @@ class BookingManager {
                     'message' => 'Error updating booking: ' . $stmt->error
                 ];
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Error updating booking: " . $e->getMessage());
             return [
                 'success' => false,
@@ -442,7 +448,7 @@ class BookingManager {
                     'message' => 'Error deleting booking: ' . $stmt->error
                 ];
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Error deleting booking: " . $e->getMessage());
             return [
                 'success' => false,
@@ -491,7 +497,7 @@ class BookingManager {
                 'data' => $stats
             ];
             
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Get booking stats error: " . $e->getMessage());
             return [
                 'success' => false,

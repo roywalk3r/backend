@@ -10,6 +10,7 @@ class ServicesPage {
   }
 
   init() {
+    
     this.setupEventListeners()
     this.loadServices()
     this.initializeFilters()
@@ -35,9 +36,9 @@ class ServicesPage {
   async loadServices() {
     try {
       this.showLoading()
-      const response = await fetch("../api/get_services.php")
+      const response = await fetch("/api/get_services.php")
       const data = await response.json()
-
+      console.log(data, "ServiceDAta")
       if (data.success) {
         this.services = data.services
         this.filteredServices = [...this.services]

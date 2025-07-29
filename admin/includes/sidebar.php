@@ -36,7 +36,7 @@
             <i class="fas fa-users me-2"></i>
             Users
         </a>
-        <hr class="text-white-50">
+        <hr class="text-black">
         <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'profile.php' ? 'active' : ''; ?>"
             href="profile.php">
             <i class="fas fa-user me-2"></i>

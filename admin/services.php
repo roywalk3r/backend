@@ -81,20 +81,8 @@ $stats = $serviceManager->getServiceStats();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="stylesheet" href="assets/css/sidebar.css">
+
     <style>
-    .stats-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: 15px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .stats-card .stat-number {
-        font-size: 2rem;
-        font-weight: bold;
-    }
-
     .service-card {
         border: none;
         border-radius: 15px;
@@ -149,7 +137,7 @@ $stats = $serviceManager->getServiceStats();
                 <!-- Statistics Cards -->
                 <?php if ($stats['success']): ?>
                 <div class="row mb-4">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="stats-card">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -160,18 +148,8 @@ $stats = $serviceManager->getServiceStats();
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="stats-card">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="stat-number">$<?php echo $stats['data']['average_price']; ?></div>
-                                    <div>Average Price</div>
-                                </div>
-                                <i class="fas fa-dollar-sign fa-2x opacity-50"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
+
+                    <div class="col-md-4">
                         <div class="stats-card">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -183,7 +161,7 @@ $stats = $serviceManager->getServiceStats();
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="stats-card">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -198,7 +176,7 @@ $stats = $serviceManager->getServiceStats();
                 <?php endif; ?>
 
                 <!-- Filters -->
-                <div class="card mb-4">
+                <div class="card mb-4 primary">
                     <div class="card-body">
                         <form method="GET" class="row g-3">
                             <div class="col-md-4">

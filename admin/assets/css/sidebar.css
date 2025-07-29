@@ -1,18 +1,86 @@
+@import url("admin.css");
 .sidebar {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-color);
 }
 
 .sidebar .nav-link {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgb(255, 255, 255);
   padding: 0.75rem 1rem;
   margin: 0.25rem 0;
   border-radius: 0.5rem;
   transition: all 0.3s ease;
+  background: #31610d;
 }
 
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-  color: white;
+  color: rgb(51, 51, 51);
   background: rgba(255, 255, 255, 0.1);
 }
+
+/* .sidebar {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .sidebar .nav-link {
+        color: rgba(255, 255, 255, 0.8);
+        padding: 0.75rem 1rem;
+        margin: 0.25rem 0;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-card .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .table th {
+        border: none;
+        background: #f8f9fa;
+        font-weight: 600;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+    }
+
+    .activity-item {
+        padding: 1rem;
+        border-left: 3px solid #667eea;
+        margin-bottom: 1rem;
+        background: #f8f9fa;
+        border-radius: 0 10px 10px 0;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+    } */

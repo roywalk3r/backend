@@ -1,5 +1,3 @@
-import { Chart } from "@/components/ui/chart"
-// Admin Panel JavaScript
 
 // Sidebar toggle
 function toggleSidebar() {

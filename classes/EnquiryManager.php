@@ -7,11 +7,11 @@ require_once __DIR__ . '/../config/database.php';
 class EnquiryManager {
     private $conn;
     
-    public function __construct() {
+  public function __construct() {
         $this->conn = getMysqliConnection();
     }
     
-    public function getEnquiries($page = 1, $limit = 20, $search = '', $status = '') {
+    public function getEnquiries($page = 1, $limit = 20, $search = '', $status = '', $priority = '') {
         try {
             $offset = ($page - 1) * $limit;
             
@@ -21,15 +21,21 @@ class EnquiryManager {
             $types = '';
             
             if (!empty($search)) {
-                $whereConditions[] = "(e.name LIKE ? OR e.email LIKE ? OR e.subject LIKE ? OR e.message LIKE ?)";
+                $whereConditions[] = "(e.first_name LIKE ? OR e.last_name LIKE ? OR e.email LIKE ? OR e.subject LIKE ? OR e.message LIKE ?)";
                 $searchTerm = "%$search%";
-                $params = array_merge($params, [$searchTerm, $searchTerm, $searchTerm, $searchTerm]);
-                $types .= 'ssss';
+                $params = array_merge($params, [$searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm]);
+                $types .= 'sssss';
             }
             
             if (!empty($status)) {
                 $whereConditions[] = "e.status = ?";
                 $params[] = $status;
+                $types .= 's';
+            }
+            
+            if (!empty($priority)) {
+                $whereConditions[] = "e.priority = ?";
+                $params[] = $priority;
                 $types .= 's';
             }
             
@@ -53,9 +59,12 @@ class EnquiryManager {
             // Get enquiries with assigned user info
             $query = "
                 SELECT e.*, 
-                       CONCAT(u.first_name, ' ', u.last_name) as assigned_user
+                       CONCAT(u.first_name, ' ', u.last_name) as assigned_user,
+                       CONCAT(e.first_name, ' ', e.last_name) as customer_name,
+                       s.name as service_name
                 FROM enquiries e 
                 LEFT JOIN users u ON e.assigned_to = u.id
+                LEFT JOIN services s ON e.service_id = s.id
                 $whereClause 
                 ORDER BY e.created_at DESC 
                 LIMIT ? OFFSET ?
@@ -100,9 +109,12 @@ class EnquiryManager {
         try {
             $stmt = $this->conn->prepare("
                 SELECT e.*, 
-                       CONCAT(u.first_name, ' ', u.last_name) as assigned_user
+                       CONCAT(u.first_name, ' ', u.last_name) as assigned_user,
+                       CONCAT(e.first_name, ' ', e.last_name) as customer_name,
+                       s.name as service_name
                 FROM enquiries e 
                 LEFT JOIN users u ON e.assigned_to = u.id
+                LEFT JOIN services s ON e.service_id = s.id
                 WHERE e.id = ?
             ");
             $stmt->bind_param("i", $id);
@@ -150,45 +162,56 @@ class EnquiryManager {
                 ];
             }
             
+            // Split name into first and last name
+            $name_parts = explode(' ', trim($data['name']), 2);
+            $first_name = $name_parts[0];
+            $last_name = isset($name_parts[1]) ? $name_parts[1] : '';
+            
             $stmt = $this->conn->prepare("
-                INSERT INTO enquiries (name, email, phone, subject, message, status) 
-                VALUES (?, ?, ?, ?, ?, 'new')
+                INSERT INTO enquiries (first_name, last_name, email, phone, subject, message, service_id, status, priority, created_at) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, 'new', 'medium', NOW())
             ");
             
             $phone = $data['phone'] ?? null;
+            $service_id = isset($data['service_id']) ? (int)$data['service_id'] : null;
             
-            $stmt->bind_param("sssss", 
-                $data['name'], 
+            $stmt->bind_param("ssssssi", 
+                $first_name,
+                $last_name,
                 $data['email'], 
                 $phone,
                 $data['subject'],
-                $data['message']
+                $data['message'],
+                $service_id
             );
             
             if ($stmt->execute()) {
+                $enquiry_id = $this->conn->insert_id;
+                
                 return [
                     'success' => true,
                     'message' => 'Enquiry submitted successfully',
-                    'data' => ['id' => $this->conn->insert_id]
+                    'enquiry_id' => $enquiry_id
                 ];
             } else {
+                error_log("Enquiry creation failed: " . $stmt->error);
                 return [
                     'success' => false,
-                    'message' => 'Error creating enquiry: ' . $stmt->error
+                    'message' => 'Failed to submit enquiry'
                 ];
             }
+            
         } catch (Exception $e) {
-            error_log("Error creating enquiry: " . $e->getMessage());
+            error_log("Enquiry creation error: " . $e->getMessage());
             return [
                 'success' => false,
-                'message' => 'Error creating enquiry: ' . $e->getMessage()
+                'message' => 'Server error occurred'
             ];
         }
     }
     
     public function updateEnquiryStatus($id, $status, $response = '') {
         try {
-            // Validate status
             $validStatuses = ['new', 'in_progress', 'resolved', 'closed'];
             if (!in_array($status, $validStatuses)) {
                 return [

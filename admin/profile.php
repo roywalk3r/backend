@@ -80,9 +80,9 @@ if ($_POST) {
                 <div class="row">
                     <!-- Profile Information -->
                     <div class="col-md-8">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">
+                        <div class="card primary mb-4">
+                            <div class="card-header" style="background-color: #31610D;">
+                                <h5 class="card-title mb-0 text-white">
                                     <i class="fas fa-user-edit me-2"></i>Profile Information
                                 </h5>
                             </div>
@@ -122,7 +122,7 @@ if ($_POST) {
                                             value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>">
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" style="background-color: #31610D;">
                                         <i class="fas fa-save me-2"></i>Update Profile
                                     </button>
                                 </form>
@@ -130,9 +130,9 @@ if ($_POST) {
                         </div>
 
                         <!-- Change Password -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">
+                        <div class="card primary">
+                            <div class="card-header" style="background-color: #31610D;">
+                                <h5 class="card-title mb-0 text-white">
                                     <i class="fas fa-lock me-2"></i>Change Password
                                 </h5>
                             </div>
@@ -159,7 +159,7 @@ if ($_POST) {
                                             class="form-control" required minlength="6">
                                     </div>
 
-                                    <button type="submit" class="btn btn-warning">
+                                    <button type="submit" class="btn" style="background-color: #31610D; color: white;">
                                         <i class="fas fa-key me-2"></i>Change Password
                                     </button>
                                 </form>
@@ -169,8 +169,8 @@ if ($_POST) {
 
                     <!-- Profile Summary -->
                     <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header">
+                        <div class="card primary">
+                            <div class="card-header" style="background-color: #31610D; color: #fff;">
                                 <h5 class="card-title mb-0">
                                     <i class="fas fa-info-circle me-2"></i>Account Summary
                                 </h5>
@@ -185,11 +185,10 @@ if ($_POST) {
                                         <?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?>
                                     </h5>
                                     <span class="badge bg-<?php 
-                                        echo $user['role'] === 'admin' ? 'danger' : 
-                                            ($user['role'] === 'manager' ? 'warning' : 'primary'); 
+                                        echo $user['role_name'] ?? '' === 'admin' ? 'danger' : 
+                                            ($user['role_name'] ?? '' === 'manager' ? 'warning' : 'primary'); 
                                     ?>">
-                                        <?php echo ucfirst($user['role']); ?>
-                                    </span>
+                                        <?php echo ucfirst($user['role_name'] ?? ''); ?>
                                 </div>
 
                                 <hr>

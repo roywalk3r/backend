@@ -59,6 +59,7 @@ $usersResult = $userManager->getUsers(1, 100);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/sidebar.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="stylesheet" href="assets/css/booking.css">
 </head>
 
@@ -80,7 +81,7 @@ $usersResult = $userManager->getUsers(1, 100);
                 <?php endif; ?>
 
                 <!-- Filters -->
-                <div class="card mb-4">
+                <div class="card mb-4 primary">
                     <div class="card-body">
                         <form method="GET" class="row g-3">
                             <div class="col-md-3">
