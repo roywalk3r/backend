@@ -8,10 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+    * {
+        color: #000;
+        padding: 0;
+        margin: 0
+    }
+
     body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #fff;
         min-height: 100vh;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
 
     .setup-container {
@@ -28,15 +34,29 @@
     }
 
     .setup-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #efd6a7;
         color: white;
         padding: 2rem;
         text-align: center;
     }
 
+    .setup-header h1 {
+        color: #000;
+    }
+
     .step {
         display: none;
         padding: 2rem;
+
+    }
+
+    .step h3 {
+        color: #000;
+        font-size: 2rem;
+    }
+
+    .step i {
+        color: #000;
     }
 
     .step.active {
@@ -53,17 +73,17 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: #e9ecef;
+        background: #31610d;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0 0.5rem;
         font-weight: bold;
-        color: #6c757d;
+        color: #fff;
     }
 
     .step-item.active {
-        background: #667eea;
+        background: #000;
         color: white;
     }
 
@@ -73,10 +93,15 @@
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #31610d;
         border: none;
         border-radius: 10px;
         padding: 0.75rem 2rem;
+        color: #fff;
+    }
+
+    #db-next-btn {
+        background-color: #31610d;
     }
 
     .form-control {
@@ -86,13 +111,14 @@
     }
 
     .form-control:focus {
-        border-color: #667eea;
+        border-color: #efd6a7;
         box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
     }
 
     .alert {
         border-radius: 10px;
         border: none;
+        background-color: #efd6a7;
     }
 
     .progress {
@@ -102,13 +128,34 @@
     }
 
     .progress-bar {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* background: linear-gradient(135deg, #31610d 0%, #efd6a7 100%); */
+        background-color: #31610d;
     }
 
     .test-result {
         padding: 1rem;
         border-radius: 10px;
         margin: 0.5rem 0;
+    }
+
+    .btn {
+        background: #31610d;
+        border: none;
+
+        color: #fff;
+    }
+
+    .btn:hover {
+        background: #efd6a7;
+        color: #000;
+    }
+
+    .btn i {
+        color: #fff;
+    }
+
+    .btn i:hover {
+        color: #000;
     }
 
     .test-success {
@@ -122,6 +169,11 @@
         color: #721c24;
         border: 1px solid #f5c6cb;
     }
+
+    .logo {
+        height: 80px;
+        width: auto;
+    }
     </style>
 </head>
 
@@ -129,7 +181,7 @@
     <div class="setup-container">
         <div class="setup-card">
             <div class="setup-header">
-                <i class="fas fa-leaf fa-3x mb-3"></i>
+                <img src="logo.png" alt="Nananom Farms Logo" class="logo">
                 <h1>Nananom Farms</h1>
                 <p class="mb-0">Database Setup Wizard</p>
             </div>

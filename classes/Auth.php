@@ -121,6 +121,19 @@ class Auth {
                     
                     // Log successful login
                     $this->logActivity($user['id'], 'login', 'users', $user['id']);
+
+                    // Send login notification (optional)
+                    require_once __DIR__ . '/EmailService.php';
+                    $emailService = new EmailService();
+                    $loginNotificationResult = $emailService->sendLoginNotification(
+                        $user, 
+                        date('Y-m-d H:i:s'), 
+                        $_SERVER['REMOTE_ADDR'] ?? 'unknown'
+                    );
+
+                    if (!$loginNotificationResult['success']) {
+                        error_log("Failed to send login notification: " . $loginNotificationResult['message']);
+                    }
                     
                     return [
                         'success' => true,
@@ -542,6 +555,15 @@ class Auth {
                 
                 // Log registration activity
                 $this->logActivity($userId, 'register', 'users', $userId);
+                
+                // Send welcome email
+                require_once __DIR__ . '/EmailService.php';
+                $emailService = new EmailService();
+                $emailResult = $emailService->sendWelcomeEmail($data);
+                
+                if (!$emailResult['success']) {
+                    error_log("Failed to send welcome email: " . $emailResult['message']);
+                }
                 
                 return [
                     'success' => true,

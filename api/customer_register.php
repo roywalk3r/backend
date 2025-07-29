@@ -1,7 +1,18 @@
 <?php
 require_once '../config/database.php';
 require_once '../classes/Auth.php';
+require_once __DIR__ . '/../classes/DatabaseChecker.php';
+use App\DatabaseChecker;
 
+// Check if setup is required
+if (!DatabaseChecker::isDatabaseConnected()) {
+    http_response_code(503);
+    echo json_encode([
+        'success' => false,
+        'message' => 'System setup required. Please contact administrator.'
+    ]);
+    exit;
+}
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');

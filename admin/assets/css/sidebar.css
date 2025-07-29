@@ -3,6 +3,11 @@
   min-height: 100vh;
   background: var(--primary-color);
 }
+img.logo {
+  width: auto;
+  height: 60px;
+  object-fit: cover;
+}
 
 .sidebar .nav-link {
   color: rgb(255, 255, 255);

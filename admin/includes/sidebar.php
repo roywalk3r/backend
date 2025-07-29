@@ -1,8 +1,8 @@
 <div class="col-md-3 col-lg-2 sidebar p-3 ">
     <div class="text-center mb-4">
-        <i class="fas fa-leaf fa-2x text-white mb-2"></i>
-        <h5 class="text-white">Nananom Farms</h5>
-        <small class="text-white-50">Admin Panel</small>
+        <img src="assets/logo.png" alt="Logo" class="logo">
+        <h5 class="text-black">Nananom Farms</h5>
+        <small class="text-black">Admin Panel</small>
     </div>
 
     <nav class="nav flex-column">

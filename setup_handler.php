@@ -133,6 +133,7 @@ try {
                 phone VARCHAR(20),
                 subject VARCHAR(255),
                 message TEXT NOT NULL,
+                response TEXT NULL,
                 service_id INT,
                 status ENUM('new', 'in_progress', 'resolved', 'closed') DEFAULT 'new',
                 priority ENUM('low', 'medium', 'high', 'urgent') DEFAULT 'medium',

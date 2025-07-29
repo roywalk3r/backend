@@ -14,7 +14,7 @@ if (!$socket) {
 }
 
 // Test common SMTP ports
-$ports = [25, 465, 587, 2525];
+$ports = [25, 465, 587, 2525,8025];
 foreach ($ports as $port) {
     $socket = @fsockopen($smtp_server, $port, $errno, $errstr, 5);
     if ($socket) {

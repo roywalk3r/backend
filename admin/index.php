@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../classes/Auth.php';
+ require_once __DIR__ . '/../init.php';
 
 $auth = new \App\Auth();
 $error_message = '';
@@ -82,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         border: 2px solid #e9ecef;
         padding: 12px 15px;
         transition: all 0.3s ease;
-        background: #f165D6;
+        background: #f1dcb5;
     }
 
     .form-control:focus {
@@ -102,6 +103,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .btn-login:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+    }
+
+    .input-group {
+        background: #f1dcb5 !important;
     }
 
     .alert {
