@@ -36,7 +36,7 @@
         <div class="hero">
             <div class="overlay"></div>
             <div class="hero-image">
-                <img src="assets/images/contact.png" alt="Hero Image">
+                <img src="assets/images/contact_pic.png" alt="contact image">
             </div>
 
             <div class="hero-content">
