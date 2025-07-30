@@ -942,3 +942,15 @@ Stack trace:
 
 [30-Jul-2025 01:19:31 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
 [30-Jul-2025 01:20:08 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 19:18:51 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 19:19:28 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 19:19:39 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 19:20:21 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 19:21:21 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 19:22:09 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 19:23:08 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 19:24:34 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[30-Jul-2025 20:18:05 Europe/Berlin] Mail debug (level 1): SMTP ERROR: Failed to connect to server: No connection could be made because the target machine actively refused it (10061)
+[30-Jul-2025 20:18:05 Europe/Berlin] Mail debug (level 2): SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[30-Jul-2025 20:18:05 Europe/Berlin] Login notification error: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[30-Jul-2025 20:18:05 Europe/Berlin] Failed to send login notification: Failed to send login notification: SMTP Error: Could not connect to SMTP host. Failed to connect to server

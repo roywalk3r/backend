@@ -48,7 +48,7 @@
             <div class="form-container">
                 <h1>Contact Us</h1>
                 <p class="subtitle">Send us a message today and we'll get back to you as soon as possible.</p>
-                <form id="enquiryForm">
+                <form id="enquiryForm" >
                     <div class="row">
                         <div class="input-group">
                             <label for="enquiryName">Your Name *</label>
@@ -157,12 +157,14 @@
         </div>
 
     </main>
-    <div id="toastContainer"></div>
-
     <?php
     include_once __DIR__ . '/partials/footer.php';
     ?>
     <script src="assets/js/main.js"></script>
+     <!-- Toast Container -->
+    <div id="toastContainer"></div>
+    <script src="assets/js/toast.js"></script>
+    <script src="assets/js/contact.js"></script>
 
 </body>
 

@@ -141,8 +141,7 @@ include_once __DIR__ . '/partials/header.php';
                 </div>
             </div>
         </div>
-
-        =
+        
         <!-----submit enquiry----->
         <div class="hero">
             <div class="overlay"></div>
@@ -165,6 +164,7 @@ include_once __DIR__ . '/partials/footer.php';
 ?>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/toast.js"></script>
+    <script src="assets/js/contact.js"></script>
 
 </body>
 
