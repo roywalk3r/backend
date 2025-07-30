@@ -17,9 +17,9 @@ try {
         echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
         exit;
     }
+
     // Get enquiry ID
     $enquiry_id = $_GET['id'] ?? null;
-    
     if (!$enquiry_id) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Enquiry ID is required']);
@@ -28,7 +28,7 @@ try {
 
     $enquiryManager = new EnquiryManager();
     $result = $enquiryManager->getEnquiryById($enquiry_id);
-    echo json_encode($result);
+
     if ($result['success']) {
         echo json_encode([
             'success' => true,

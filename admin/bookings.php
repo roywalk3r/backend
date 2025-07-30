@@ -68,8 +68,10 @@ $usersResult = $userManager->getUsers(1, 100);
         <div class="row">
             <!-- Sidebar -->
             <?php include 'includes/sidebar.php'; ?>
+             
 
             <!-- Main Content -->
+             <div class="main-container">
             <div class="col-md-9 col-lg-10 p-4">
                 <!-- Header -->
                 <?php include 'includes/header.php'; ?>
@@ -364,7 +366,7 @@ $usersResult = $userManager->getUsers(1, 100);
             </div>
         </div>
     </div>
-
+                                </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     function openBookingModal(booking) {
@@ -384,11 +386,59 @@ $usersResult = $userManager->getUsers(1, 100);
     }
 
     function viewBookingDetails(id) {
-        // You can implement AJAX call here to fetch and display full booking details
-        const modal = new bootstrap.Modal(document.getElementById('viewModal'));
-        document.getElementById('viewModalBody').innerHTML = '<p>Loading booking details for ID: ' + id + '</p>';
-        modal.show();
-    }
+    const modal = new bootstrap.Modal(document.getElementById('viewModal'));
+    const modalBody = document.getElementById('viewModalBody');
+
+    // Show loading spinner
+    modalBody.innerHTML = `
+        <div class="text-center p-4">
+            <div class="spinner-border text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading booking details for ID: ${id}</p>
+        </div>
+    `;
+
+    modal.show();
+
+    // Fetch booking details from API
+    fetch(`../api/get_customer_bookings.php?id=${id}`)
+        .then(response => response.json())
+        .then(data => {
+    if (data.success && data.bookings.length > 0) {
+        const booking = data.bookings[0];
+                modalBody.innerHTML = `
+                    <h5 class="mb-3">Booking Details</h5>
+                    <p><strong>Name:</strong> ${booking.name}</p>
+                    <p><strong>Email:</strong> ${booking.email}</p>
+                    <p><strong>Phone:</strong> ${booking.phone}</p>
+                    <p><strong>Date:</strong> ${booking.booking_date}</p>
+                    <p><strong>Service:</strong> ${booking.service_name}</p>
+                    <p><strong>Status:</strong> 
+                        <span class="badge bg-${booking.status === 'confirmed' ? 'success' : 'warning'}">
+                            ${booking.status}
+                        </span>
+                    </p>
+                    <p><strong>Notes:</strong><br>${booking.notes || 'None'}</p>
+                `;
+            } else {
+                modalBody.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>Error:</strong> ${data.message || 'Booking not found.'}
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching booking details:', error);
+            modalBody.innerHTML = `
+                <div class="alert alert-danger">
+                    <strong>Failed to load booking details. Please try again.</strong>
+                </div>
+            `;
+        });
+}
+
     </script>
 </body>
 

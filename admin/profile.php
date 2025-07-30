@@ -54,12 +54,14 @@ if ($_POST) {
 </head>
 
 <body>
+    
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
             <?php include 'includes/sidebar.php'; ?>
 
             <!-- Main Content -->
+            <div class="main-container">
             <div class="col-md-9 col-lg-10 p-4">
                 <!-- Header -->
                 <?php include 'includes/header.php'; ?>
@@ -231,6 +233,8 @@ if ($_POST) {
             </div>
         </div>
     </div>
+                                        </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

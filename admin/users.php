@@ -74,11 +74,12 @@ $roles = $rolesData['success'] ? $rolesData['roles'] : [];
             <?php include 'includes/sidebar.php'; ?>
 
             <!-- Main Content -->
-            <div class="col-md-9 col-lg-10 p-4">
-                <!-- Header -->
-                <?php include 'includes/header.php'; ?>
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
+            <div class="main-container">
+                <div class="col-md-9 col-lg-10 p-4">
+                    <!-- Header -->
+                    <?php include 'includes/header.php'; ?>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
                         <h2><i class="fas fa-users me-2"></i>Users Management</h2>
                         <p class="text-muted">Manage system users and their permissions</p>
                     </div>
@@ -332,6 +333,8 @@ $roles = $rolesData['success'] ? $rolesData['roles'] : [];
         </div>
     </div>
     <?php endif; ?>
+                                        </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

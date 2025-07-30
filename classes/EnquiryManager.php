@@ -122,11 +122,12 @@ class EnquiryManager {
             $result = $stmt->get_result();
             
             if ($result->num_rows > 0) {
-                return [
-                    'success' => true,
-                    'data' => $result->fetch_assoc()
-                ];
-            } else {
+    return [
+        'success' => true,
+        'enquiry' => $result->fetch_assoc()
+    ];
+}
+ else {
                 return [
                     'success' => false,
                     'message' => 'Enquiry not found'

@@ -277,5 +277,7 @@ function initializeSearch() {
   })
 }
 
+
+
 // Initialize search on page load
 document.addEventListener("DOMContentLoaded", initializeSearch)
