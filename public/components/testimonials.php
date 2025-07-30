@@ -114,3 +114,21 @@
           </div>
       </div>
   </div>
+  <script>
+  const swiper = new Swiper('.testimonials-carousel', {
+    direction: 'horizontal',
+    loop: true,
+    speed: 3000, // Duration of one loop (lower = faster)
+    slidesPerView: 'auto',
+    spaceBetween: 30,
+    allowTouchMove: false, // Disable manual swipe
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+    },
+    freeMode: {
+      enabled: true,
+      momentum: false,
+    },
+  });
+</script>

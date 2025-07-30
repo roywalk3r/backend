@@ -19,13 +19,20 @@ require_once __DIR__ . '/../init.php'
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://kit.fontawesome.com/00a449879e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+
 
 </head>
 
 <body>
     <?php
-include_once __DIR__ . '/partials/header.php';
-?>
+    include_once __DIR__ . '/partials/header.php';
+    ?>
     <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay active">
         <div class="loading-content">
@@ -306,36 +313,36 @@ include_once __DIR__ . '/partials/header.php';
         </div>
     </main>
     <?php
-include_once __DIR__ . '/partials/footer.php';
-?>
+    include_once __DIR__ . '/partials/footer.php';
+    ?>
     <script src="assets/js/main.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-    var swiper = new Swiper(".testimonials-carousel", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        freeMode: true,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        breakpoints: {
-            320: {
-                slidesPerView: 1,
-                spaceBetween: 10,
+        var swiper = new Swiper(".testimonials-carousel", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            freeMode: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
             },
-            640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-            },
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-            },
-        }
-    });
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                },
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            }
+        });
     </script>
 
 
