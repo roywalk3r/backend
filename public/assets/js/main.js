@@ -446,12 +446,13 @@ class NananomFarms {
       this.showButtonLoading(e.target.querySelector('button[type="submit"]'))
 
       const response = await fetch("/api/create_feedback.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(feedbackData),
-      })
+  method: "POST", 
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(feedbackData),
+});
+
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
