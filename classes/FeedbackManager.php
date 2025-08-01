@@ -9,6 +9,8 @@ class FeedbackManager {
     public function __construct() {
         $this->conn = getMysqliConnection();
     }
+
+    
     
     public function getAllFeedback($page = 1, $limit = 10, $search = '', $status = '', $rating = '') {
         try {
@@ -408,41 +410,40 @@ class FeedbackManager {
         return $this->getAllFeedback($page, $limit, $search, $status, $rating);
     }
     
-    public function createFeedback($data) {
-        try {
-            $stmt = $this->conn->prepare("
-                INSERT INTO feedback (customer_name, email, phone, service_id, rating, comment, status, created_at) 
-                VALUES (?, ?, ?, ?, ?, ?, 'pending', NOW())
-            ");
-            
-            $stmt->bind_param("sssiss", 
-                $data['customer_name'],
-                $data['email'],
-                $data['phone'],
-                $data['service_id'],
-                $data['rating'],
-                $data['comment']
-            );
-            
-            if ($stmt->execute()) {
-                return [
-                    'success' => true,
-                    'message' => 'Feedback created successfully',
-                    'feedback_id' => $this->conn->insert_id
-                ];
-            } else {
-                return [
-                    'success' => false,
-                    'message' => 'Error creating feedback: ' . $stmt->error
-                ];
-            }
-        } catch (\Exception $e) {
-            error_log("Error creating feedback: " . $e->getMessage());
+   public function createFeedback($data) {
+    try {
+        $stmt = $this->conn->prepare("
+            INSERT INTO feedback (first_name, last_name, email, rating, message, status, created_at) 
+            VALUES (?, ?, ?, ?, ?, 'pending', NOW())
+        ");
+        
+        $stmt->bind_param("sssis", 
+            $data['first_name'],
+            $data['last_name'],
+            $data['email'],
+            $data['rating'],
+            $data['message']
+        );
+        
+        if ($stmt->execute()) {
+            return [
+                'success' => true,
+                'message' => 'Feedback created successfully',
+                'feedback_id' => $this->conn->insert_id
+            ];
+        } else {
             return [
                 'success' => false,
-                'message' => 'Error creating feedback: ' . $e->getMessage()
+                'message' => 'Error creating feedback: ' . $stmt->error
             ];
         }
+    } catch (\Exception $e) {
+        error_log("Error creating feedback: " . $e->getMessage());
+        return [
+            'success' => false,
+            'message' => 'Error creating feedback: ' . $e->getMessage()
+        ];
     }
+}
 }
 ?>

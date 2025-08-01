@@ -116,6 +116,8 @@ require_once __DIR__ . '/../init.php'
 
 
 
+
+
         <!-- Booking Modal -->
         <div id="bookingModal" class="modal">
             <div class="modal-content">
@@ -243,63 +245,64 @@ require_once __DIR__ . '/../init.php'
             </div>
         </div>
 
+        <button onclick="openFeedbackModal()" class="ctaBtn ctaBt-main" style="margin-bottom: 30px;">Send us a Feedback</button>
+
         <!-- Feedback Modal -->
-        <div id="feedbackModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Share Your Feedback</h3>
-                    <button onclick="closeFeedbackModal()" class="modal-close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+        <!-- Feedback Modal -->
+<div id="feedbackModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Share Your Feedback</h3>
+      <button onclick="closeFeedbackModal()" class="modal-close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
 
-                <form id="feedbackForm" class="feedback-form">
-                    <div class="form-group">
-                        <label for="feedbackName">Your Name *</label>
-                        <input type="text" id="feedbackName" name="customer_name" required>
-                    </div>
+    <form id="feedbackForm" class="feedback-form">
+      <div class="form-group">
+        <label for="firstName">First Name *</label>
+        <input type="text" id="firstName" name="first_name" required>
+      </div>
 
-                    <div class="form-group">
-                        <label for="feedbackEmail">Email Address *</label>
-                        <input type="email" id="feedbackEmail" name="customer_email" required>
-                    </div>
+      <div class="form-group">
+        <label for="lastName">Last Name *</label>
+        <input type="text" id="lastName" name="last_name" required>
+      </div>
 
-                    <div class="form-group">
-                        <label for="feedbackService">Service Used *</label>
-                        <select id="feedbackService" name="service_id" required>
-                            <option value="">Select service...</option>
-                            <!-- Options will be populated dynamically -->
-                        </select>
-                    </div>
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
 
-                    <div class="form-group">
-                        <label>Rating *</label>
-                        <div class="rating-input">
-                            <input type="radio" id="star5" name="rating" value="5">
-                            <label for="star5"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star4" name="rating" value="4">
-                            <label for="star4"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star3" name="rating" value="3">
-                            <label for="star3"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star2" name="rating" value="2">
-                            <label for="star2"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star1" name="rating" value="1">
-                            <label for="star1"><i class="fas fa-star"></i></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="feedbackComment">Your Feedback *</label>
-                        <textarea id="feedbackComment" name="comment" rows="5" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-full">
-                        <i class="fas fa-heart"></i>
-                        Submit Feedback
-                    </button>
-                </form>
-            </div>
+      <div class="form-group">
+        <label>Rating *</label>
+        <div class="rating-input">
+          <input type="radio" id="star5" name="rating" value="5" required>
+          <label for="star5"><i class="fas fa-star"></i></label>
+          <input type="radio" id="star4" name="rating" value="4">
+          <label for="star4"><i class="fas fa-star"></i></label>
+          <input type="radio" id="star3" name="rating" value="3">
+          <label for="star3"><i class="fas fa-star"></i></label>
+          <input type="radio" id="star2" name="rating" value="2">
+          <label for="star2"><i class="fas fa-star"></i></label>
+          <input type="radio" id="star1" name="rating" value="1">
+          <label for="star1"><i class="fas fa-star"></i></label>
         </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Your Feedback *</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full">
+        <i class="fas fa-heart"></i>
+        Submit Feedback
+      </button>
+    </form>
+  </div>
+</div>
+
 
         <!-- Toast Notification -->
         <div id="toast" class="toast">
