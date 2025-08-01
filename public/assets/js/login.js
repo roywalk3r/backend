@@ -19,12 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
+function getMainPath() {
+  const url = new URL(window.location.href)
+  return url.origin + '/' + url.pathname.split('/')[1]
+}
 function handleLoginSubmit(e) {
   e.preventDefault()
-
+const mainPath = getMainPath()
   const formData = new FormData(e.target)
   const data = Object.fromEntries(formData.entries())
-
+console.log(mainPath)
   // Clear previous errors
   clearAllErrors()
 
@@ -36,34 +40,34 @@ function handleLoginSubmit(e) {
   // Show loading state
   const submitBtn = e.target.querySelector('button[type="submit"]')
   setButtonLoading(submitBtn, true)
-
-  // Submit login request
-  fetch("/api/customer_login.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      return response.json()
-    })
-    .then((result) => {
-      console.log("Login response:", result)
-
-      if (result.success) {
-        window.showToast("Login successful! Redirecting...", "success")
-
-        // Redirect after short delay
-        setTimeout(() => {
-          const redirectUrl = new URLSearchParams(window.location.search).get("redirect") || "profile.php"
-          window.location.href = redirectUrl
-        }, 1500)
-      } else {
-        window.showToast(result.message || "Login failed", "error")
+  
+// Submit login request
+fetch(`${mainPath}/api/customer_login.php`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+})
+.then((response) => {
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+  return response.json()
+})
+.then((result) => {
+  console.log("Login response:", result)
+  
+  if (result.success) {
+    window.showToast("Login successful! Redirecting...", "success")
+    
+    // Redirect after short delay
+    setTimeout(() => {
+      const redirectUrl = new URLSearchParams(window.location.search).get("redirect") || "profile.php"
+      window.location.href = redirectUrl
+    }, 1500)
+  } else {
+    window.showToast(result.message || "Login failed", "error")
 
         // Handle specific error cases
         if (result.locked) {
@@ -73,6 +77,7 @@ function handleLoginSubmit(e) {
     })
     .catch((error) => {
       console.error("Login error:", error)
+
       window.showToast("Login failed. Please check your connection and try again.", "error")
     })
     .finally(() => {

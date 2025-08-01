@@ -14,8 +14,13 @@ class ServicesPage {
     this.setupEventListeners()
     this.loadServices()
     this.initializeFilters()
+    this.getHostPath()
   }
 
+  getHostPath(){
+    const url = new URL(window.location.href)
+    return url.origin + '/' + url.pathname.split('/')[1]
+  }
   setupEventListeners() {
     // Search functionality
     document.getElementById("serviceSearch").addEventListener("input", this.debounce(this.handleSearch.bind(this), 300))
@@ -36,7 +41,8 @@ class ServicesPage {
   async loadServices() {
     try {
       this.showLoading()
-      const response = await fetch("/api/get_services.php")
+      
+      const response = await fetch(`${this.getHostPath()}/api/services.php`)
       const data = await response.json()
       console.log(data, "ServiceDAta")
       if (data.success) {

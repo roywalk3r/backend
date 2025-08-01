@@ -172,12 +172,11 @@ try {
             // Create feedback table
             $sql = "CREATE TABLE IF NOT EXISTS feedback (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                first_name VARCHAR(100) NOT NULL,
-                last_name VARCHAR(100) NOT NULL,
-                email VARCHAR(255) NOT NULL,
+                customer_name VARCHAR(100) NOT NULL,
+                customer_email VARCHAR(255) NOT NULL,
                 rating INT CHECK (rating >= 1 AND rating <= 5),
-                message TEXT NOT NULL,
-                status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+                comment TEXT NOT NULL,
+                response TEXT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )";

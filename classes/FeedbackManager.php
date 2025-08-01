@@ -59,7 +59,7 @@ class FeedbackManager {
             
             // Get feedback
             $query = "
-                SELECT f.id, f.customer_name, f.email, f.phone, f.service_id, f.comment, f.rating, 
+                SELECT f.id, f.customer_name, f.customer_email, f.phone, f.service_id, f.comment, f.rating, 
                        f.status, f.admin_response, f.created_at, f.updated_at, s.name as service_name
                 FROM feedback f 
                 LEFT JOIN services s ON f.service_id = s.id

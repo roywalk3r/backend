@@ -19,12 +19,9 @@ require_once __DIR__ . '/../init.php'
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://kit.fontawesome.com/00a449879e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    
+
 
 
 </head>
@@ -245,63 +242,63 @@ require_once __DIR__ . '/../init.php'
             </div>
         </div>
 
-        <button onclick="openFeedbackModal()" class="ctaBtn ctaBt-main" style="margin-bottom: 30px;">Send us a Feedback</button>
+        <!-- <button onclick="openFeedbackModal()" class="ctaBtn ctaBt-main" style="margin-bottom: 30px;">Send us a
+            Feedback</button> -->
 
         <!-- Feedback Modal -->
-        <!-- Feedback Modal -->
-<div id="feedbackModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3>Share Your Feedback</h3>
-      <button onclick="closeFeedbackModal()" class="modal-close">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
+        <!-- <div id="feedbackModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Share Your Feedback</h3>
+                    <button onclick="closeFeedbackModal()" class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
 
-    <form id="feedbackForm" class="feedback-form">
-      <div class="form-group">
-        <label for="firstName">First Name *</label>
-        <input type="text" id="firstName" name="first_name" required>
-      </div>
+                <form id="feedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="first_name" required>
+                    </div>
 
-      <div class="form-group">
-        <label for="lastName">Last Name *</label>
-        <input type="text" id="lastName" name="last_name" required>
-      </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="last_name" required>
+                    </div>
 
-      <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input type="email" id="email" name="email" required>
-      </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
 
-      <div class="form-group">
-        <label>Rating *</label>
-        <div class="rating-input">
-          <input type="radio" id="star5" name="rating" value="5" required>
-          <label for="star5"><i class="fas fa-star"></i></label>
-          <input type="radio" id="star4" name="rating" value="4">
-          <label for="star4"><i class="fas fa-star"></i></label>
-          <input type="radio" id="star3" name="rating" value="3">
-          <label for="star3"><i class="fas fa-star"></i></label>
-          <input type="radio" id="star2" name="rating" value="2">
-          <label for="star2"><i class="fas fa-star"></i></label>
-          <input type="radio" id="star1" name="rating" value="1">
-          <label for="star1"><i class="fas fa-star"></i></label>
-        </div>
-      </div>
+                    <div class="form-group">
+                        <label>Rating *</label>
+                        <div class="rating-input">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
 
-      <div class="form-group">
-        <label for="message">Your Feedback *</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-      </div>
+                    <div class="form-group">
+                        <label for="message">Your Feedback *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
 
-      <button type="submit" class="btn btn-primary btn-full">
-        <i class="fas fa-heart"></i>
-        Submit Feedback
-      </button>
-    </form>
-  </div>
-</div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-heart"></i>
+                        Submit Feedback
+                    </button>
+                </form>
+            </div>
+        </div> -->
 
 
         <!-- Toast Notification -->
@@ -315,38 +312,32 @@ require_once __DIR__ . '/../init.php'
             </button>
         </div>
     </main>
+    <div id="disqus_thread" class="container"></div>
+
     <?php
     include_once __DIR__ . '/partials/footer.php';
     ?>
     <script src="assets/js/main.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        var swiper = new Swiper(".testimonials-carousel", {
-            slidesPerView: 3,
-            spaceBetween: 30,
-            freeMode: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            breakpoints: {
-                320: {
-                    slidesPerView: 1,
-                    spaceBetween: 10,
-                },
-                640: {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                },
-                768: {
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                },
-            }
-        });
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+        s.src = 'https://nananom-farms.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 </body>

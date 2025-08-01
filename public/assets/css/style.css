@@ -9,20 +9,6 @@
   text-transform: none;
 }
 
-
-/*==========courosel for testimonial section==========*/
-.swiper-wrapper {
-  display: flex;
-  align-items: stretch;
-}
-
-.swiper-slide.testimonial {
-  flex-shrink: 0;
-  width: auto;
-  min-width: 300px;
-  max-width: 350px;
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -1609,7 +1595,9 @@ footer .footer-container {
   background: var(--background-light);
   color: var(--text-primary);
 }
-
+#disqus_thread {
+  margin-bottom: 2rem;
+}
 .booking-form,
 .enquiry-form,
 .feedback-form {

@@ -28,6 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
+function getHostPath() {
+  const url = new URL(window.location.href)
+  return url.origin + '/' + url.pathname.split('/')[1]
+  
+}
 function handleRegisterSubmit(e) {
   e.preventDefault()
 
@@ -42,9 +47,9 @@ function handleRegisterSubmit(e) {
   // Show loading state
   const submitBtn = e.target.querySelector('button[type="submit"]')
   setButtonLoading(submitBtn, true)
-
+const location = getHostPath()
   // Submit registration
-  fetch("/api/customer_register.php", {
+  fetch(`${location}/api/customer_register.php`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

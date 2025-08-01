@@ -114,7 +114,7 @@
           </div>
       </div>
   </div>
-  <script>
+  <!-- <script>
   const swiper = new Swiper('.testimonials-carousel', {
     direction: 'horizontal',
     loop: true,
@@ -131,4 +131,29 @@
       momentum: false,
     },
   });
-</script>
+</script> -->
+  <script>
+var swiper = new Swiper(".testimonials-carousel", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    freeMode: true,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    breakpoints: {
+        320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+        },
+        640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+        },
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+    }
+});
+  </script>

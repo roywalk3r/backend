@@ -51,8 +51,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function getHostPath() {
+        const url = new URL(window.location.href)
+        return url.origin + '/' + url.pathname.split('/')[1]
+    }
+
     function checkAuthStatus() {
-        fetch("/api/check_auth.php")
+
+        fetch(`${getHostPath()}/api/check_auth.php`)
             .then((response) => response.json())
             .then((data) => {
                 if (!data.authenticated) {
@@ -65,9 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch((error) => {
-
-                console.error("Auth check error:", error)
-                window.location.href = "login.php"
+                console.log(error, "error from header profile")
             })
     }
 

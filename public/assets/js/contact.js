@@ -5,13 +5,17 @@ class ContactPage {
     this.chatMessages = []
     this.init()
   }
-
+getHostPath() {
+  const url = new URL(window.location.href)
+  return url.origin + '/' + url.pathname.split('/')[1]
+}
   init() {
     this.setupEventListeners()
     this.initializeFAQs()
     this.initializeAnimations()
     this.setMinDates()
     this.initializeChat()
+    this.getHostPath()
   }
 
   setupEventListeners() {
@@ -81,8 +85,8 @@ class ContactPage {
 
     try {
       this.showButtonLoading(e.target.querySelector('button[type="submit"]'))
-
-      const response = await fetch("../api/create_enquiry.php", {
+    const mainPath = this.getHostPath()
+const response = await fetch(`${mainPath}/api/create_enquiry.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,8 +128,8 @@ class ContactPage {
 
     try {
       this.showButtonLoading(e.target.querySelector('button[type="submit"]'))
-
-      const response = await fetch("../api/create_booking.php", {
+    const mainPath = this.getHostPath()
+    const response = await fetch(`${mainPath}/api/create_booking.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

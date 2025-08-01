@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize user menu dropdown
   const userMenuToggle = document.getElementById("userMenuToggle")
   const userDropdown = document.getElementById("userDropdown")
-
+//get host path from server url
   if (userMenuToggle && userDropdown) {
     userMenuToggle.addEventListener("click", (e) => {
       e.stopPropagation()
@@ -20,14 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
   
   
   })
+    const mainPath = getHostPath()
 
+   function getHostPath() {
+    const url = new URL(window.location.href)
+    return url.origin + '/' + url.pathname.split('/')[1]
+  }
 // Check authentication status
 function checkAuthStatus() {
   const currentPage = window.location.pathname
   const isAuthPage =  currentPage.includes("register.php")
   const isProfilePage = currentPage.includes("profile.php")
 
-  fetch("/api/check_auth.php")
+  fetch(`${mainPath}/api/check_auth.php`)
     .then((response) => response.json())
     .then((data) => {
       if (data.authenticated) {
@@ -56,7 +61,7 @@ function checkAuthStatus() {
 // Logout function
 async function logout() {
   try {
-    const response = await fetch("/api/customer_logout.php", {
+    const response = await fetch(`${mainPath}/api/customer_logout.php`, {
       method: "POST",
     })
 

@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   loadProfileData()
 
 })
-
+function getHostPath() {
+    const url = new URL(window.location.href)
+    return url.origin + '/' + url.pathname.split('/')[1]
+  }
+  
 function initializeProfile() {
   // Check authentication status
   checkAuthStatus()
@@ -117,8 +121,8 @@ function initializeForms() {
 
 function loadProfileData() {
   showLoading("Loading profile...")
-
-  fetch("/api/get_customer_profile.php")
+  const location = getHostPath()
+  fetch(`${location}/api/get_customer_profile.php`)
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -178,11 +182,12 @@ function loadTabData(tab) {
 function loadBookings() {
   const container = document.getElementById("bookingsContainer")
   if (!container) return
+    const location = getHostPath()
 
   container.innerHTML =
     '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading your bookings...</p></div>'
 
-  fetch("/api/get_customer_bookings.php")
+  fetch(`${location}/api/get_customer_bookings.php`)
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -275,11 +280,12 @@ function displayBookings(bookings) {
 function loadEnquiries() {
   const container = document.getElementById("enquiriesContainer")
   if (!container) return
+    const location = getHostPath()
 
   container.innerHTML =
     '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading your enquiries...</p></div>'
 
-  fetch("/api/get_customer_enquiries.php")
+  fetch(`${location}/api/get_customer_enquiries.php`)
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -379,8 +385,8 @@ function handleProfileUpdate(e) {
 
   const submitBtn = e.target.querySelector('button[type="submit"]')
   setButtonLoading(submitBtn, true)
-
-  fetch("/api/update_customer_profile.php", {
+const location = getHostPath()
+  fetch(`${location}/api/update_customer_profile.php`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -421,8 +427,8 @@ function handlePasswordUpdate(e) {
 
   const submitBtn = e.target.querySelector('button[type="submit"]')
   setButtonLoading(submitBtn, true)
-
-  fetch("/api/update_customer_password.php", {
+const location = getHostPath()
+fetch(`${location}/api/update_customer_password.php`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -694,8 +700,9 @@ function checkAuthStatus() {
   const currentPage = window.location.pathname
   const isAuthPage = currentPage.includes("login.php") || currentPage.includes("register.php")
   const isProfilePage = currentPage.includes("profile.php")
+    const location = getHostPath()
 
-  fetch("/api/check_auth.php")
+  fetch(`${location}/api/check_auth.php`)
     .then((response) => response.json())
     .then((data) => {
       if (data.authenticated) {
@@ -718,7 +725,9 @@ function checkAuthStatus() {
 }
 async function logout() {
   try {
-    const response = await fetch("/api/customer_logout.php", {
+    const location = getHostPath()
+
+    const response = await fetch(`${location}/api/customer_logout.php`, {
       method: "POST",
     })
 
