@@ -126,181 +126,187 @@ try {
             <?php require_once __DIR__ . '/includes/sidebar.php'; ?>
 
             <!-- Main Content -->
-             <div class="main-container">
-            <div class="col-md-9 col-lg-10 p-4">
-                <!-- Header -->
-                <?php include 'includes/header.php'; ?>
-                <?php include 'includes/welcome.php'; ?>
+            <div class="main-container">
+                <div class="col-md-9 col-lg-10 p-4">
+                    <!-- Header -->
+                    <?php include 'includes/header.php'; ?>
+                    <?php include 'includes/welcome.php'; ?>
 
-                <!-- Statistics Cards -->
-                <div class="row mb-4">
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="stat-number"><?php echo $stats['services']['total_services'] ?? 0; ?>
-                                    </div>
-                                    <div>Active Services</div>
-                                </div>
-                                <i class="fas fa-cogs fa-2x opacity-50"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="stat-number"><?php echo $stats['bookings']['total_bookings'] ?? 0; ?>
-                                    </div>
-                                    <div>Total Bookings</div>
-                                </div>
-                                <i class="fas fa-calendar fa-2x opacity-50"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="stat-number"><?php echo $stats['enquiries']['total_enquiries'] ?? 0; ?>
-                                    </div>
-                                    <div>Customer Enquiries</div>
-                                </div>
-                                <i class="fas fa-envelope fa-2x opacity-50"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="stat-number">
-                                        $<?php echo number_format($stats['bookings']['total_revenue'] ?? 0, 0); ?></div>
-                                    <div>Total Revenue</div>
-                                </div>
-                                <i class="fas fa-dollar-sign fa-2x opacity-50"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts Row -->
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-chart-pie me-2"></i>
-                                    Services by Category
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="servicesChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-chart-bar me-2"></i>
-                                    Booking Status Overview
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="bookingsChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activity -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-envelope me-2"></i>
-                                    Recent Enquiries
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <?php if (isset($recentEnquiries['success']) && $recentEnquiries['success'] && !empty($recentEnquiries['enquiries'])): ?>
-                                <?php foreach ($recentEnquiries['enquiries'] as $enquiry): ?>
-                                <div class="activity-item">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <h6 class="mb-1">
-                                                <?php echo htmlspecialchars($enquiry['first_name'] . ' ' . $enquiry['last_name']); ?>
-                                            </h6>
-                                            <p class="mb-1 text-muted">
-                                                <?php echo htmlspecialchars(substr($enquiry['subject'], 0, 50)) . '...'; ?>
-                                            </p>
-                                            <small
-                                                class="text-muted"><?php echo date('M j, Y H:i', strtotime($enquiry['created_at'])); ?></small>
+                    <!-- Statistics Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="stat-number">
+                                            <?php echo $stats['services']['total_services'] ?? 0; ?>
                                         </div>
-                                        <span
-                                            class="badge bg-<?php echo $enquiry['status'] === 'new' ? 'primary' : ($enquiry['status'] === 'resolved' ? 'success' : 'warning'); ?>">
-                                            <?php echo ucfirst(str_replace('_', ' ', $enquiry['status'])); ?>
-                                        </span>
+                                        <div>Active Services</div>
                                     </div>
+                                    <i class="fas fa-cogs fa-2x opacity-50"></i>
                                 </div>
-                                <?php endforeach; ?>
-                                <div class="text-center">
-                                    <a href="enquiries.php" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-eye me-1"></i>View All Enquiries
-                                    </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="stat-number">
+                                            <?php echo $stats['bookings']['total_bookings'] ?? 0; ?>
+                                        </div>
+                                        <div>Total Bookings</div>
+                                    </div>
+                                    <i class="fas fa-calendar fa-2x opacity-50"></i>
                                 </div>
-                                <?php else: ?>
-                                <p class="text-muted text-center">No recent enquiries.</p>
-                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="stat-number">
+                                            <?php echo $stats['enquiries']['total_enquiries'] ?? 0; ?>
+                                        </div>
+                                        <div>Customer Enquiries</div>
+                                    </div>
+                                    <i class="fas fa-envelope fa-2x opacity-50"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="stat-number">
+                                            <?php echo number_format($stats['enquiries']['enquiries_this_month'] ?? 0, 0); ?>
+                                        </div>
+                                        <div>Enquiries This Month</div>
+                                    </div>
+                                    <i class="fas fa-dollar-sign fa-2x opacity-50"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-calendar me-2"></i>
-                                    Recent Bookings
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <?php if (isset($recentBookings['success']) && $recentBookings['success'] && !empty($recentBookings['bookings'])): ?>
-                                <?php foreach ($recentBookings['bookings'] as $booking): ?>
-                                <div class="activity-item">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <h6 class="mb-1"><?php echo htmlspecialchars($booking['customer_name']); ?>
-                                            </h6>
-                                            <p class="mb-1 text-muted">
-                                                <?php echo htmlspecialchars($booking['service'] ?? 'Unknown Service'); ?>
-                                            </p>
-                                            <small class="text-muted">
-                                                <?php echo date('M j, Y', strtotime($booking['appointment_date'] ?? $booking['booking_date'])); ?>
-                                                - $<?php echo number_format($booking['total_amount'] ?? 0, 2); ?>
-                                            </small>
-                                        </div>
-                                        <span
-                                            class="badge bg-<?php echo $booking['status'] === 'confirmed' ? 'success' : ($booking['status'] === 'pending' ? 'warning' : 'secondary'); ?>">
-                                            <?php echo ucfirst($booking['status']); ?>
-                                        </span>
+                    <!-- Charts Row -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-pie me-2"></i>
+                                        Services by Category
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="servicesChart"></canvas>
                                     </div>
                                 </div>
-                                <?php endforeach; ?>
-                                <div class="text-center">
-                                    <a href="bookings.php" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-eye me-1"></i>View All Bookings
-                                    </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-bar me-2"></i>
+                                        Booking Status Overview
+                                    </h5>
                                 </div>
-                                <?php else: ?>
-                                <p class="text-muted text-center">No recent bookings.</p>
-                                <?php endif; ?>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="bookingsChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-envelope me-2"></i>
+                                        Recent Enquiries
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <?php if (isset($recentEnquiries['success']) && $recentEnquiries['success'] && !empty($recentEnquiries['enquiries'])): ?>
+                                    <?php foreach ($recentEnquiries['enquiries'] as $enquiry): ?>
+                                    <div class="activity-item">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h6 class="mb-1">
+                                                    <?php echo htmlspecialchars($enquiry['first_name'] . ' ' . $enquiry['last_name']); ?>
+                                                </h6>
+                                                <p class="mb-1 text-muted">
+                                                    <?php echo htmlspecialchars(substr($enquiry['subject'], 0, 50)) . '...'; ?>
+                                                </p>
+                                                <small
+                                                    class="text-muted"><?php echo date('M j, Y H:i', strtotime($enquiry['created_at'])); ?></small>
+                                            </div>
+                                            <span
+                                                class="badge bg-<?php echo $enquiry['status'] === 'new' ? 'primary' : ($enquiry['status'] === 'resolved' ? 'success' : 'warning'); ?>">
+                                                <?php echo ucfirst(str_replace('_', ' ', $enquiry['status'])); ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; ?>
+                                    <div class="text-center">
+                                        <a href="enquiries.php" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-eye me-1"></i>View All Enquiries
+                                        </a>
+                                    </div>
+                                    <?php else: ?>
+                                    <p class="text-muted text-center">No recent enquiries.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-calendar me-2"></i>
+                                        Recent Bookings
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <?php if (isset($recentBookings['success']) && $recentBookings['success'] && !empty($recentBookings['bookings'])): ?>
+                                    <?php foreach ($recentBookings['bookings'] as $booking): ?>
+                                    <div class="activity-item">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h6 class="mb-1">
+                                                    <?php echo htmlspecialchars($booking['customer_name']); ?>
+                                                </h6>
+                                                <p class="mb-1 text-muted">
+                                                    <?php echo htmlspecialchars($booking['service'] ?? 'Unknown Service'); ?>
+                                                </p>
+                                                <small class="text-muted">
+                                                    <?php echo date('M j, Y', strtotime($booking['appointment_date'] ?? $booking['booking_date'])); ?>
+                                                    - $<?php echo number_format($booking['total_amount'] ?? 0, 2); ?>
+                                                </small>
+                                            </div>
+                                            <span
+                                                class="badge bg-<?php echo $booking['status'] === 'confirmed' ? 'success' : ($booking['status'] === 'pending' ? 'warning' : 'secondary'); ?>">
+                                                <?php echo ucfirst($booking['status']); ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; ?>
+                                    <div class="text-center">
+                                        <a href="bookings.php" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-eye me-1"></i>View All Bookings
+                                        </a>
+                                    </div>
+                                    <?php else: ?>
+                                    <p class="text-muted text-center">No recent bookings.</p>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -308,7 +314,6 @@ try {
             </div>
         </div>
     </div>
-                                </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -26,11 +26,7 @@
             <i class="fas fa-cogs me-2"></i>
             Services
         </a>
-        <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'feedback.php' ? 'active' : ''; ?>"
-            href="feedback.php">
-            <i class="fas fa-star me-2"></i>
-            Feedback
-        </a>
+
         <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : ''; ?>"
             href="users.php">
             <i class="fas fa-users me-2"></i>

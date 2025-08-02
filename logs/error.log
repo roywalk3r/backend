@@ -960,3 +960,187 @@ Stack trace:
 [30-Jul-2025 22:59:03 Europe/Berlin] Login notification error: SMTP Error: Could not connect to SMTP host. Failed to connect to server
 [30-Jul-2025 22:59:03 Europe/Berlin] Failed to send login notification: Failed to send login notification: SMTP Error: Could not connect to SMTP host. Failed to connect to server
 [31-Jul-2025 00:29:32 Europe/Berlin] Record failed attempt error: Unknown column 'user_agent' in 'field list'
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 2): SERVER -> CLIENT: 220 Rseann Mailpit ESMTP Service ready
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: EHLO localhost
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 2): SERVER -> CLIENT: 250-Rseann greets localhost
+250-SIZE 0
+250 ENHANCEDSTATUSCODES
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: MAIL FROM:<noreply@nananom.com>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 2): SERVER -> CLIENT: 250 2.1.0 Ok
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: RCPT TO:<admin@nananomfarms.com>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 2): SERVER -> CLIENT: 250 2.1.5 Ok
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: DATA
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 2): SERVER -> CLIENT: 354 Start mail input; end with <CR><LF>.<CR><LF>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: Date: Sat, 2 Aug 2025 07:09:58 +0000
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: To: System Administrator <admin@nananomfarms.com>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: From: Nananom Farms <noreply@nananom.com>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: Subject: Login Notification - Nananom Farms
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: Message-ID: <HkJy7CPqWNdjAMdqMWozCfF58degr39vrm1c88v3g@localhost>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: X-Mailer: PHPMailer 6.10.0 (https://github.com/PHPMailer/PHPMailer)
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: MIME-Version: 1.0
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:  boundary="b1=_HkJy7CPqWNdjAMdqMWozCfF58degr39vrm1c88v3g"
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: --b1=_HkJy7CPqWNdjAMdqMWozCfF58degr39vrm1c88v3g
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: Content-Type: text/plain; charset=iso-8859-1
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         Login Notification
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         Hello System!
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         We wanted to let you know that your account was accessed:
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         - Time: 2025-08-02 07:09:58
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         - IP Address: ::1
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         If this was you, no action is needed. If you didn't log in, please contact us immediately.
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         Best regards,
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         The Nananom Farms Team
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         © 2025 Nananom Farms. All rights reserved.
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: --b1=_HkJy7CPqWNdjAMdqMWozCfF58degr39vrm1c88v3g
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         <!DOCTYPE html>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         <html>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         <head>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:             <meta charset='UTF-8'>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:             <title>Login Notification</title>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:             <style>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 .header { background: #2c5530; color: white; padding: 20px; text-align: center; }
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 .content { padding: 20px; background: #f9f9f9; }
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 .footer { background: #333; color: white; padding: 15px; text-align: center; font-size: 12px; }
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:             </style>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         </head>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         <body>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:             <div class='container'>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 <div class='header'>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     <h1>Login Notification</h1>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 </div>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 <div class='content'>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     <h2>Hello System!</h2>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     <p>We wanted to let you know that your account was accessed:</p>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     <ul>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                         <li><strong>Time:</strong> 2025-08-02 07:09:58</li>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                         <li><strong>IP Address:</strong> ::1</li>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     </ul>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     <p>If this was you, no action is needed. If you didn't log in, please contact us immediately.</p>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     <p>Best regards,<br>The Nananom Farms Team</p>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 </div>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 <div class='footer'>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                     <p>&copy; 2025 Nananom Farms. All rights reserved.</p>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:                 </div>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:             </div>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         </body>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         </html>
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER:         
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: --b1=_HkJy7CPqWNdjAMdqMWozCfF58degr39vrm1c88v3g--
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: 
+
+[02-Aug-2025 07:10:00 UTC] Mail debug (level 1): CLIENT -> SERVER: .
+
+[02-Aug-2025 07:10:01 UTC] Mail debug (level 2): SERVER -> CLIENT: 250 2.0.0 Ok: queued as VkUQ33RHGrLTUsjhVghM83
+
+[02-Aug-2025 07:10:01 UTC] Mail debug (level 1): CLIENT -> SERVER: QUIT
+
+[02-Aug-2025 07:10:01 UTC] Mail debug (level 2): SERVER -> CLIENT: 221 2.0.0 Rseann Mailpit ESMTP Service closing transmission channel
+
